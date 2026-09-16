@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Jonel & Shirley's Wedding Invitation</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.js"></script>
+</head>
+<body>
+
+  <!-- Audio Player with Royalty-Free Instrumental Background Music -->
+  <audio id="bg-music" loop src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=wedding-piano-112199.mp3"></audio>
+  <button id="music-btn" class="music-toggle" aria-label="Toggle Music">
+    🎵 Play Song
+  </button>
+
+  <div class="flipbook-wrapper">
+    <div id="flipbook">
+      
+      <!-- Page 1: Cover Page (Single Page Start) -->
+      <div class="page hard" data-density="hard">
+        <div class="page-content cover-page with-bg-img" style="background-image: linear-gradient(rgba(11, 29, 58, 0.82), rgba(11, 29, 58, 0.82)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80');">
+          <p class="announcement animate-fade-in">THANK YOU FOR CELEBRATING WITH US</p>
+          <h1 class="animate-pop-up">Jonel & Shirley</h1>
+          <div class="divider animate-expand"></div>
+          <p class="subtitle animate-fade-in">WE ARE GETTING MARRIED</p>
+          <p class="date animate-fade-in">JUNE 6, 2026</p>
+          <div class="swipe-hint animate-pulse">Swipe or tap corner to open ➔</div>
+        </div>
+      </div>
+
+      <!-- Page 2: Celebration Details -->
+      <div class="page">
+        <div class="page-content with-bg-img" style="background-image: linear-gradient(rgba(11, 29, 58, 0.85), rgba(11, 29, 58, 0.85)), url('https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80');">
+          <div class="image-overlay-text">
+            <h2 class="animate-pop-up">The Celebration</h2>
+            <p class="animate-fade-in">Join us as we exchange vows and begin our new chapter together.</p>
+            <p class="highlight-date animate-fade-in">June 6, 2026</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 3: Parents & Primary Honors -->
+      <div class="page">
+        <div class="page-content text-page with-bg-img" style="background-image: linear-gradient(rgba(11, 29, 58, 0.88), rgba(11, 29, 58, 0.88)), url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80');">
+          <h2 class="animate-pop-up">Parents & Honors</h2>
+          
+          <div class="entourage-section animate-fade-in">
+            <p class="role-title">Parents of the Groom</p>
+            <p>Mr. Father Name & Mrs. Mother Name</p>
+
+            <p class="role-title">Parents of the Bride</p>
+            <p>Mr. Father Name & Mrs. Mother Name</p>
+
+            <div class="divider-small"></div>
+
+            <p class="role-title">Maid of Honor</p>
+            <p>Maid of Honor Name</p>
+
+            <p class="role-title">Best Man</p>
+            <p>Best Man Name</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 4: Principal Sponsors -->
+      <div class="page">
+        <div class="page-content text-page with-bg-img" style="background-image: linear-gradient(rgba(11, 29, 58, 0.88), rgba(11, 29, 58, 0.88)), url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=800&q=80');">
+          <h2 class="animate-pop-up">Principal Sponsors</h2>
+          <p class="section-desc animate-fade-in">To guide us in our journey</p>
+          
+          <div class="two-column-list animate-fade-in">
+            <div class="column">
+              <p>Mr. Sponsor One</p>
+              <p>Mr. Sponsor Two</p>
+              <p>Mr. Sponsor Three</p>
+              <p>Mr. Sponsor Four</p>
+              <p>Mr. Sponsor Five</p>
+            </div>
+            <div class="column">
+              <p>Mrs. Sponsor One</p>
+              <p>Mrs. Sponsor Two</p>
+              <p>Mrs. Sponsor Three</p>
+              <p>Mrs. Sponsor Four</p>
+              <p>Mrs. Sponsor Five</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 5: Secondary Sponsors & Bridal Party -->
+      <div class="page">
+        <div class="page-content text-page with-bg-img" style="background-image: linear-gradient(rgba(11, 29, 58, 0.88), rgba(11, 29, 58, 0.88)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80');">
+          <h2 class="animate-pop-up">Bridal Party</h2>
+          
+          <div class="animate-fade-in">
+            <p class="role-title">Secondary Sponsors</p>
+            <p class="sub-detail"><strong>Candle:</strong> Sponsor Pair 1</p>
+            <p class="sub-detail"><strong>Veil:</strong> Sponsor Pair 2</p>
+            <p class="sub-detail"><strong>Cord:</strong> Sponsor Pair 3</p>
+
+            <div class="divider-small"></div>
+
+            <p class="role-title">Bridesmaids & Groomsmen</p>
+            <p class="sub-detail">Bridesmaid 1 & Groomsman 1</p>
+            <p class="sub-detail">Bridesmaid 2 & Groomsman 2</p>
+            <p class="sub-detail">Bridesmaid 3 & Groomsman 3</p>
+            <p class="sub-detail">Bridesmaid 4 & Groomsman 4</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 6: Little Attendants -->
+      <div class="page">
+        <div class="page-content text-page with-bg-img" style="background-image: linear-gradient(rgba(11, 29, 58, 0.88), rgba(11, 29, 58, 0.88)), url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80');">
+          <h2 class="animate-pop-up">Little Attendants</h2>
+          
+          <div class="animate-fade-in">
+            <p class="role-title">Flower Girls & Bearers</p>
+            <div class="pairs-grid">
+              <p>Flower Girl 1 • Ring Bearer 1</p>
+              <p>Flower Girl 2 • Coin Bearer 2</p>
+              <p>Flower Girl 3 • Bible Bearer 3</p>
+              <p>Flower Girl 4 • Banner Bearer 4</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 7: Schedule & Venue -->
+      <div class="page">
+        <div class="page-content text-page with-bg-img" style="background-image: linear-gradient(rgba(11, 29, 58, 0.88), rgba(11, 29, 58, 0.88)), url('https://images.unsplash.com/photo-1544078751-58fee2d8a03b?auto=format&fit=crop&w=800&q=80');">
+          <h2 class="animate-pop-up">Schedule & Venue</h2>
+          <div class="timeline animate-fade-in">
+            <div class="event"><span class="time">3:00 PM</span><span class="desc">Wedding Ceremony</span></div>
+            <div class="event"><span class="time">5:00 PM</span><span class="desc">Cocktail Hour</span></div>
+            <div class="event"><span class="time">6:30 PM</span><span class="desc">Dinner Reception</span></div>
+          </div>
+          
+          <div class="venue-info animate-fade-in">
+            <p class="venue-name">Grand Ballroom & Gardens</p>
+            <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn-primary">📍 Open Map</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 8: Dress Code -->
+      <div class="page">
+        <div class="page-content text-page with-bg-img" style="background-image: linear-gradient(rgba(11, 29, 58, 0.88), rgba(11, 29, 58, 0.88)), url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80');">
+          <h2 class="animate-pop-up">Dress Code</h2>
+          <div class="animate-fade-in">
+            <p><strong>Formal / Semi-Formal</strong></p>
+            <p class="palette-desc">Navy Blue & Pure White</p>
+            <div class="color-swatches">
+              <span class="swatch" style="background: #0b1d3a;" title="Navy Blue"></span>
+              <span class="swatch" style="background: #ffffff; border: 1px solid #0b1d3a;" title="Pure White"></span>
+              <span class="swatch" style="background: #1d3557;" title="Midnight Blue"></span>
+              <span class="swatch" style="background: #a8dadc;" title="Soft Ice Accent"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 9: RSVP Page -->
+      <div class="page hard" data-density="hard">
+        <div class="page-content rsvp-page with-bg-img" style="background-image: linear-gradient(rgba(11, 29, 58, 0.88), rgba(11, 29, 58, 0.88)), url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=800&q=80');">
+          <h2 class="animate-pop-up">RSVP</h2>
+          <p class="rsvp-deadline animate-fade-in">Kindly reply by May 1, 2026</p>
+          
+          <form id="rsvp-form" class="rsvp-form animate-fade-in">
+            <div class="form-group">
+              <label for="full-name">Full Name(s)</label>
+              <input type="text" id="full-name" name="name" required placeholder="e.g. John & Jane Doe" />
+            </div>
+
+            <div class="form-group">
+              <label for="attendance">Will you attend?</label>
+              <select id="attendance" name="attendance" required>
+                <option value="Joyfully Accepts">Joyfully Accepts</option>
+                <option value="Regretfully Declines">Regretfully Declines</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="dietary">Dietary Requests</label>
+              <input type="text" id="dietary" name="dietary" placeholder="e.g. Vegetarian, Allergies" />
+            </div>
+
+            <button type="submit" class="btn-primary">Submit Response</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="flipbook-controls">
+    <button id="prev-btn" aria-label="Previous Page">‹ Prev</button>
+    <span id="page-num">Page 1 / 9</span>
+    <button id="next-btn" aria-label="Next Page">Next ›</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
