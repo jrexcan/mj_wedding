@@ -1,0 +1,68 @@
+{
+  "couple": {
+    "partner1": "Mary",
+    "partner2": "J-Rex",
+    "displayDate": "June 6, 2026"
+  },
+
+  "parents": {
+    "groom": ["Mr. Esmeraldo C. Canilang", "Mrs. Elvira D. Canilang"],
+    "bride": ["Mr. Gil Camacho", "Mrs. Espedita S. Camacho"]
+  },
+
+  "honorAttendants": {
+    "maidOfHonor": "Maid of Honor Name",
+    "bestMan": "Best Man Name"
+  },
+
+  "principalSponsors": {
+    "men": [
+      "Mr. Sponsor One",
+      "Mr. Sponsor Two",
+      "Mr. Sponsor Three",
+      "Mr. Sponsor Four",
+      "Mr. Sponsor Five"
+    ],
+    "women": [
+      "Mrs. Sponsor One",
+      "Mrs. Sponsor Two",
+      "Mrs. Sponsor Three",
+      "Mrs. Sponsor Four",
+      "Mrs. Sponsor Five"
+    ]
+  },
+
+  "secondarySponsors": [
+    { "role": "Candle", "sponsor1": "Candle Sponsor One", "sponsor2": "Candle Sponsor Two" },
+    { "role": "Veil", "sponsor1": "Veil Sponsor One", "sponsor2": "Veil Sponsor Two" },
+    { "role": "Cord", "sponsor1": "Cord Sponsor One", "sponsor2": "Cord Sponsor Two" }
+  ],
+
+  "bridalParty": [
+    { "bridesmaid": "Bridesmaid 1", "groomsman": "Groomsman 1" },
+    { "bridesmaid": "Bridesmaid 2", "groomsman": "Groomsman 2" },
+    { "bridesmaid": "Bridesmaid 3", "groomsman": "Groomsman 3" },
+    { "bridesmaid": "Bridesmaid 4", "groomsman": "Groomsman 4" }
+  ],
+
+  "littleAttendants": [
+    { "flowerGirl": "Flower Girl 1", "bearerRole": "Ring Bearer", "bearerName": "" },
+    { "flowerGirl": "Flower Girl 2", "bearerRole": "Coin Bearer", "bearerName": "" },
+    { "flowerGirl": "Flower Girl 3", "bearerRole": "Bible Bearer", "bearerName": "" },
+    { "flowerGirl": "Flower Girl 4", "bearerRole": "Banner Bearer", "bearerName": "" }
+  ],
+
+  "schedule": [
+    { "time": "4:00 PM", "label": "Wedding ceremony" },
+    { "time": "5:00 PM", "label": "Cocktail hour" },
+    { "time": "6:30 PM", "label": "Dinner reception" }
+  ],
+
+  "venue": {
+    "name": "WestFarm Resort Hotel",
+    "address": "Dumpay West Basista, Philippines",
+    "mapUrl": "https://maps.google.com/maps?q=WestFarm+Resort+Hotel&ftid=0x3391459801473d6f:0x765c31a6cefb3343"
+  },
+
+  "rsvpDeadline": "November 10, 2026"
+}
