@@ -132,12 +132,29 @@
       <div class="page">
         <div class="page-content text-page bg-six">
           <h2>Little attendants</h2>
-          <p class="role-title">Flower girls &amp; bearers</p>
-          <div class="pairs-grid" id="little-attendants-list">
-            <p>Flower Girl 1 · Ring Bearer</p>
-            <p>Flower Girl 2 · Coin Bearer</p>
-            <p>Flower Girl 3 · Bible Bearer</p>
-            <p>Flower Girl 4 · Banner Bearer</p>
+
+          <p class="role-title">Flower girls</p>
+          <div class="pairs-grid" id="flower-girls-list">
+            <p>Flower Girl 1</p>
+            <p>Flower Girl 2</p>
+            <p>Flower Girl 3</p>
+            <p>Flower Girl 4</p>
+          </div>
+
+          <div class="divider-small"></div>
+
+          <div id="bearers-list">
+            <p class="role-title">Ring bearer</p>
+            <p class="sub-detail">Ring Bearer Name</p>
+
+            <p class="role-title">Coin bearer</p>
+            <p class="sub-detail">Coin Bearer Name</p>
+
+            <p class="role-title">Bible bearer</p>
+            <p class="sub-detail">Bible Bearer Name</p>
+
+            <p class="role-title">Banner bearer</p>
+            <p class="sub-detail">Banner Bearer Name</p>
           </div>
         </div>
       </div>
@@ -183,7 +200,7 @@
           <p class="rsvp-deadline" id="rsvp-deadline-text">Kindly reply by May 1, 2026</p>
 
           <div class="rsvp-shell" id="rsvp-shell">
-            <form id="rsvp-form" class="rsvp-form" novalidate>
+            <form id="rsvp-form" class="rsvp-form" name="rsvp" novalidate>
               <div class="form-group">
                 <label for="full-name">Full name</label>
                 <input type="text" id="full-name" name="name" required autocomplete="name"

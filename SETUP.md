@@ -19,18 +19,51 @@ It's grouped in entourage order, matching the pages of the invitation:
 4. `principalSponsors` — `men` and `women` arrays, shown as two columns
 5. `secondarySponsors` — candle, veil, cord, in that ceremonial order; each has `role`, `sponsor1`, and `sponsor2`, shown as its own labeled line like Maid of Honor / Best Man
 6. `bridalParty` — bridesmaid/groomsman pairs
-7. `littleAttendants` — flower girl paired with each bearer role
+7. `littleAttendants` — `flowerGirls` (a plain list of names) and `bearers` (each with a `role` and a `name`, shown the same way as the secondary sponsors)
 8. `schedule` — the timeline of events
 9. `venue` — `name`, `address` (leave `""` to hide the address line), and `mapUrl` (the Google Maps link behind "Open map")
 10. `rsvpDeadline` — the date shown on the RSVP page
 
 Add or remove entries freely — e.g. a 6th principal sponsor pair, or a 5th bridesmaid/groomsman pair — the page renders however many you list. Keep the file valid JSON: every name in quotes, commas between entries, no trailing comma after the last one in a list. If you're not sure, paste the file into jsonlint.com before saving.
 
-**This only works once the site is hosted** (step 2). Opening `index.html` by double-clicking it loads it as a `file://` page, and browsers block a page from reading a sibling file that way — the invitation will fall back to showing generic placeholder names instead of failing. That's a browser security rule, not a bug in the site; the moment it's on Netlify, Cloudflare Pages, or anywhere else over `https://`, `data.json` loads normally. To preview your edits locally before uploading, run `npx serve` in the folder and open the localhost link it gives you.
+**This only works once the site is hosted** (step 1). Opening `index.html` by double-clicking it loads it as a `file://` page, and browsers block a page from reading a sibling file that way — the invitation will fall back to showing generic placeholder names instead of failing. That's a browser security rule, not a bug in the site; the moment it's live on GitHub Pages, `data.json` loads normally. To preview your edits locally before pushing, run `npx serve` in the folder and open the localhost link it gives you.
 
 ---
 
-## 1. Collect replies in a Google Sheet
+## 1. Put it on GitHub Pages
+
+1. Create a new GitHub repository (public, unless you're on a paid plan that allows private Pages sites).
+2. Add all five files to it — `index.html`, `styles.css`, `script.js`, `data.json`, `rsvp-backend.gs` — either by dragging them into the GitHub web UI or with `git push`.
+3. In the repo: **Settings → Pages**. Under "Build and deployment", set **Source** to **Deploy from a branch**, pick your branch (usually `main`) and the `/ (root)` folder, then **Save**.
+4. GitHub gives you a URL like `https://yourusername.github.io/your-repo-name/`. It can take a minute or two to go live the first time.
+
+That link is HTTPS by default, which is what you want — some services (Formspree included) don't work well from `http://` pages.
+
+---
+
+## 2. Collect replies with Formspree
+
+Formspree sits between your form and your inbox — no server of your own, no deploy step, and it works fine on GitHub Pages.
+
+1. Go to **formspree.io** and sign up (free tier covers 50 submissions/month, which is plenty for a wedding).
+2. Click **New Form**, name it something like "Wedding RSVP".
+3. Formspree gives you an endpoint that looks like `https://formspree.io/f/abcdwxyz`. Copy it.
+4. Open `script.js`. Near the top:
+
+   ```js
+   const RSVP_METHOD = 'formspree';
+   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/abcdwxyz'; // your real endpoint
+   ```
+
+5. Push the change to GitHub (or re-upload `script.js`) and wait for Pages to redeploy.
+
+Test it by submitting a real RSVP from the live site. The first submission from a brand-new form usually asks you to confirm it in an email Formspree sends you — do that once, then every reply after lands directly in your Formspree dashboard and gets emailed to you too.
+
+**If Formspree isn't available later, or you'd rather use a spreadsheet:** the Google Sheets option below still works — GitHub Pages hosting and the RSVP backend are independent of each other. Just set `RSVP_METHOD` to `'endpoint'` instead of `'formspree'` and follow the steps in the next section.
+
+---
+
+## 3. Alternative: collect replies in a Google Sheet
 
 Free, no account beyond Google, and you read the responses in a spreadsheet.
 
@@ -44,9 +77,10 @@ Free, no account beyond Google, and you read the responses in a spreadsheet.
    - **Who has access:** Anyone
 7. Click **Deploy**. Google asks you to authorize — approve it. On the "Google hasn't verified this app" screen, choose **Advanced → Go to (your project)**.
 8. Copy the **Web app URL**. It looks like `https://script.google.com/macros/s/AKfy...../exec`.
-9. Open `script.js`. On line 11, paste the URL between the quotes:
+9. Open `script.js`. Set:
 
    ```js
+   const RSVP_METHOD = 'endpoint';
    const RSVP_ENDPOINT = 'https://script.google.com/macros/s/AKfy...../exec';
    ```
 
@@ -58,18 +92,7 @@ Test it by opening the URL in a browser tab — you should see `{"result":"ok",.
 
 ---
 
-## 2. Put it online
-
-Any static host works. Drag-and-drop options, no command line:
-
-- **Netlify Drop** — netlify.com/drop, drag the folder in, get a link immediately.
-- **Cloudflare Pages** or **GitHub Pages** — both free, both fine.
-
-Whatever you pick, the link you send guests should be HTTPS. Apps Script rejects requests from plain `http://` pages in some browsers.
-
----
-
-## 3. Optional touches
+## 4. Optional touches
 
 **Music.** Put an mp3 named `music.mp3` in the folder. The button appears on its own once the file loads and hides itself if it's missing. Use something you have the right to use — Pixabay and the YouTube Audio Library both have free instrumental tracks. Don't hotlink someone else's URL; it will break on you eventually.
 
@@ -105,3 +128,4 @@ If you host your own photo alongside the site (an `images/` folder next to `inde
 - Added a hidden spam trap field, checked on both the page and the server.
 - The original Unsplash background photos are back on every page, with the navy overlay preserved.
 - All names, entourage roles, schedule, and venue details moved out of the HTML into `data.json`, so they can be edited without touching any code.
+- The RSVP backend is now switchable (`RSVP_METHOD` in `script.js`): Formspree for GitHub Pages, a Google Sheet, Netlify Forms if hosted there instead, or local-only — one line to change, no other code to touch.

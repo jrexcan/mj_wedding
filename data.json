@@ -2,7 +2,7 @@
   "couple": {
     "partner1": "Mary",
     "partner2": "J-Rex",
-    "displayDate": "June 6, 2026"
+    "displayDate": "December 18, 2026"
   },
 
   "parents": {
@@ -45,24 +45,27 @@
     { "bridesmaid": "Bridesmaid 4", "groomsman": "Groomsman 4" }
   ],
 
-  "littleAttendants": [
-    { "flowerGirl": "Flower Girl 1", "bearerRole": "Ring Bearer", "bearerName": "" },
-    { "flowerGirl": "Flower Girl 2", "bearerRole": "Coin Bearer", "bearerName": "" },
-    { "flowerGirl": "Flower Girl 3", "bearerRole": "Bible Bearer", "bearerName": "" },
-    { "flowerGirl": "Flower Girl 4", "bearerRole": "Banner Bearer", "bearerName": "" }
-  ],
+  "littleAttendants": {
+    "flowerGirls": ["Flower Girl 1", "Flower Girl 2", "Flower Girl 3", "Flower Girl 4"],
+    "bearers": [
+      { "role": "Ring Bearer", "name": "Ring Bearer Name" },
+      { "role": "Coin Bearer", "name": "Coin Bearer Name" },
+      { "role": "Bible Bearer", "name": "Bible Bearer Name" },
+      { "role": "Banner Bearer", "name": "Banner Bearer Name" }
+    ]
+  },
 
   "schedule": [
-    { "time": "4:00 PM", "label": "Wedding ceremony" },
+    { "time": "3:00 PM", "label": "Wedding ceremony" },
     { "time": "5:00 PM", "label": "Cocktail hour" },
     { "time": "6:30 PM", "label": "Dinner reception" }
   ],
 
   "venue": {
     "name": "WestFarm Resort Hotel",
-    "address": "Dumpay West Basista, Philippines",
+    "address": "",
     "mapUrl": "https://maps.google.com/maps?q=WestFarm+Resort+Hotel&ftid=0x3391459801473d6f:0x765c31a6cefb3343"
   },
 
-  "rsvpDeadline": "November 10, 2026"
+  "rsvpDeadline": "May 1, 2026"
 }

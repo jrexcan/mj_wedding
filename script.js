@@ -2,12 +2,33 @@
    Mary & J-Rex — invitation logic
    ============================================================
 
-   SET THIS ONE VALUE to start collecting real RSVPs.
-   Paste the Google Apps Script web app URL from SETUP.md below.
-   While it is empty, replies are saved in the guest's own browser
-   only, and the page says so honestly instead of pretending.
+   RSVP BACKEND — pick whichever fits how you're hosting this.
+   Since this is going on GitHub Pages (plain static hosting,
+   no server-side processing), the options that work are:
+
+   1. FORMSPREE (recommended). Free, no code to deploy. Sign up
+      at formspree.io, create a form, and paste the endpoint it
+      gives you — like https://formspree.io/f/abcdwxyz — into
+      FORMSPREE_ENDPOINT below. Set RSVP_METHOD to 'formspree'.
+      Replies show up in your Formspree dashboard and are also
+      emailed to you.
+
+   2. GOOGLE SHEETS. If you'd rather have replies land in a
+      spreadsheet, deploy rsvp-backend.gs as a Google Apps Script
+      web app (steps in SETUP.md), paste its URL into RSVP_ENDPOINT
+      below, and set RSVP_METHOD to 'endpoint'.
+
+   3. NETLIFY FORMS only works if this is actually hosted on
+      Netlify (it needs Netlify's own build step) — not GitHub
+      Pages. Left in for anyone who switches hosts later.
+
+   Until one of these is configured, RSVP_METHOD stays 'local':
+   replies are saved on each guest's own device, and the page
+   says so honestly rather than pretending they reached you.
    ============================================================ */
-const RSVP_ENDPOINT = '';
+const RSVP_METHOD = 'local'; // 'formspree' | 'endpoint' | 'netlify' | 'local'
+const FORMSPREE_ENDPOINT = ''; // e.g. 'https://formspree.io/f/abcdwxyz'
+const RSVP_ENDPOINT = '';      // Google Apps Script URL, only used when RSVP_METHOD is 'endpoint'
 
 const TOTAL_PAGES = 9;
 
@@ -89,12 +110,20 @@ function applyWeddingData(data) {
     ).join(''));
   }
 
-  // Little attendants, paired
-  if (Array.isArray(data.littleAttendants)) {
-    set('little-attendants-list', data.littleAttendants.map((a) => {
-      const bearer = [a.bearerRole, a.bearerName].filter(Boolean).join(' ');
-      return `<p>${escapeHtml(a.flowerGirl)} \u00b7 ${escapeHtml(bearer)}</p>`;
-    }).join(''));
+  // Little attendants: flower girls listed on their own, bearers each
+  // get their own role label + name, same treatment as secondary sponsors.
+  if (data.littleAttendants) {
+    if (Array.isArray(data.littleAttendants.flowerGirls)) {
+      set('flower-girls-list', data.littleAttendants.flowerGirls.map((name) =>
+        `<p>${escapeHtml(name)}</p>`
+      ).join(''));
+    }
+    if (Array.isArray(data.littleAttendants.bearers)) {
+      set('bearers-list', data.littleAttendants.bearers.map((b) => `
+        <p class="role-title">${escapeHtml(b.role)}</p>
+        <p class="sub-detail">${escapeHtml(b.name)}</p>
+      `).join(''));
+    }
   }
 
   // Schedule
@@ -396,6 +425,48 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
+  async function sendToFormspree(entry) {
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        name: entry.name,
+        attendance: entry.attendance,
+        guests: entry.guests,
+        dietary: entry.dietary
+      })
+    });
+    if (!res.ok) {
+      // Formspree returns JSON with details on most failures.
+      const body = await res.json().catch(() => null);
+      const msg = body && Array.isArray(body.errors)
+        ? body.errors.map((e) => e.message).join('; ')
+        : 'HTTP ' + res.status;
+      throw new Error(msg);
+    }
+  }
+
+  async function sendToNetlify(entry) {
+    // Netlify Forms expects a normal form-encoded POST to the page
+    // itself, with form-name matching the form's name="" attribute.
+    const body = new URLSearchParams({
+      'form-name': 'rsvp',
+      name: entry.name,
+      attendance: entry.attendance,
+      guests: String(entry.guests),
+      dietary: entry.dietary
+    });
+    const res = await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body.toString()
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+  }
+
   async function sendToServer(entry) {
     // text/plain avoids a CORS preflight, which Apps Script cannot answer.
     const res = await fetch(RSVP_ENDPOINT, {
@@ -407,6 +478,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     const body = await res.json().catch(() => ({ result: 'ok' }));
     if (body.result === 'error') throw new Error(body.message || 'Server rejected the entry');
     return body;
+  }
+
+  // One switch, so the submit handler and the retry queue agree on
+  // where a reply is supposed to go.
+  async function deliverEntry(entry) {
+    if (RSVP_METHOD === 'formspree' && FORMSPREE_ENDPOINT) return sendToFormspree(entry);
+    if (RSVP_METHOD === 'endpoint' && RSVP_ENDPOINT) return sendToServer(entry);
+    if (RSVP_METHOD === 'netlify') return sendToNetlify(entry);
+    throw new Error('no-remote-configured'); // RSVP_METHOD === 'local'
   }
 
   function showDone(entry, offline) {
@@ -446,14 +526,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     status.classList.remove('is-error');
     status.textContent = '';
 
-    if (!RSVP_ENDPOINT) {
+    if (RSVP_METHOD === 'local') {
       saveLocally(entry);
       showDone(entry, true);
       return;
     }
 
     try {
-      await sendToServer(entry);
+      await deliverEntry(entry);
       showDone(entry, false);
     } catch (err) {
       const stored = saveLocally(entry);
@@ -481,7 +561,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* Retry anything stranded on this device by an earlier failure. */
   async function flushPending() {
-    if (!RSVP_ENDPOINT) return;
+    if (RSVP_METHOD === 'local') return;
     let list;
     try {
       list = JSON.parse(localStorage.getItem('rsvp-pending') || '[]');
@@ -490,7 +570,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const remaining = [];
     for (const entry of list) {
-      try { await sendToServer(entry); } catch (_) { remaining.push(entry); }
+      try { await deliverEntry(entry); } catch (_) { remaining.push(entry); }
     }
     try { localStorage.setItem('rsvp-pending', JSON.stringify(remaining)); } catch (_) {}
   }
