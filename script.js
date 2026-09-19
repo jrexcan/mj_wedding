@@ -75,9 +75,9 @@ function applyWeddingData(data) {
   if (data.parents && data.honorAttendants) {
     set('parents-honors', `
       <p class="role-title">Parents of the groom</p>
-      <p>${escapeHtml(data.parents.groom.join(' & '))}</p>
+      <p>${escapeHtml(data.parents.groom.join(' &amp; '))}</p>
       <p class="role-title">Parents of the bride</p>
-      <p>${escapeHtml(data.parents.bride.join(' & '))}</p>
+      <p>${escapeHtml(data.parents.bride.join(' &amp; '))}</p>
       <div class="divider-small"></div>
       <p class="role-title">Maid of honor</p>
       <p>${escapeHtml(data.honorAttendants.maidOfHonor)}</p>
@@ -164,6 +164,15 @@ function applyWeddingData(data) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  // Kick this off immediately so it's downloaded well before the
+  // first flip — decoding happens later, once an AudioContext exists.
+  const flipSoundArrayBufferPromise = fetch('page-flip.mp3')
+    .then((res) => { if (!res.ok) throw new Error('HTTP ' + res.status); return res.arrayBuffer(); })
+    .catch((err) => {
+      console.warn('page-flip.wav not found — falling back to the synthesized flip sound.', err);
+      return null;
+    });
+
   /* ---------------------------------------------------------
      Names, entourage & venue — loaded from data.json so the
      couple can edit one file instead of touching any markup.
@@ -189,6 +198,138 @@ document.addEventListener('DOMContentLoaded', async () => {
   const pagesBackup = Array.from(document.querySelectorAll('.page'));
 
   const isMobile = () => window.innerWidth < 768;
+
+  /* ---------------------------------------------------------
+     Page-flip sound. Plays the real recording (page-flip.wav)
+     once it's decoded; falls back to a synthesized swish if the
+     file is missing or fails to decode, so a flip never goes
+     silent because of a missing asset.
+     --------------------------------------------------------- */
+  let audioCtx = null;
+  let flipAudioBuffer = null;
+  let flipAudioBufferChecked = false;
+
+  function getAudioCtx() {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    if (!audioCtx) audioCtx = new AC();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+  }
+
+  async function getFlipAudioBuffer(ctx) {
+    if (flipAudioBufferChecked) return flipAudioBuffer;
+    flipAudioBufferChecked = true;
+    try {
+      const arrayBuffer = await flipSoundArrayBufferPromise;
+      if (!arrayBuffer) return null;
+      flipAudioBuffer = await ctx.decodeAudioData(arrayBuffer);
+    } catch (err) {
+      console.warn('Could not decode page-flip.wav — falling back to the synthesized flip sound.', err);
+      flipAudioBuffer = null;
+    }
+    return flipAudioBuffer;
+  }
+
+  function playRecordedFlipSound(ctx, buffer) {
+    const src = ctx.createBufferSource();
+    src.buffer = buffer;
+
+    const gain = ctx.createGain();
+    gain.gain.value = 0.7; // turn down here if it's louder than the background music
+
+    src.connect(gain).connect(ctx.destination);
+    src.start();
+  }
+
+  function playFlipSound() {
+    const ctx = getAudioCtx();
+    if (!ctx) return;
+
+    getFlipAudioBuffer(ctx).then((buffer) => {
+      if (buffer) {
+        playRecordedFlipSound(ctx, buffer);
+      } else {
+        playSynthesizedFlipSound(ctx);
+      }
+    });
+  }
+
+  function playSynthesizedFlipSound(ctx) {
+    if (!ctx) return;
+    const now = ctx.currentTime;
+
+    // --- Phase 1: the riffle — fluttering rustle as the page moves
+    // through the air. A fast, slightly irregular amplitude wobble on
+    // top of filtered noise is what reads as "paper" rather than
+    // generic hiss; a plain decay envelope alone sounds like static.
+    const riffleDuration = 0.16;
+    const riffleSize = Math.floor(ctx.sampleRate * riffleDuration);
+    const riffleBuffer = ctx.createBuffer(1, riffleSize, ctx.sampleRate);
+    const riffleData = riffleBuffer.getChannelData(0);
+
+    for (let i = 0; i < riffleSize; i++) {
+      const t = i / riffleSize;
+      const decay = Math.pow(1 - t, 1.6);
+      // Two overlapping wobble rates avoid a too-regular, buzzy flutter.
+      const flutter = 0.55
+        + 0.3 * Math.sin(2 * Math.PI * 42 * t)
+        + 0.15 * Math.sin(2 * Math.PI * 97 * t + 1.3);
+      riffleData[i] = (Math.random() * 2 - 1) * decay * flutter;
+    }
+
+    const riffleSrc = ctx.createBufferSource();
+    riffleSrc.buffer = riffleBuffer;
+
+    const riffleFilter = ctx.createBiquadFilter();
+    riffleFilter.type = 'bandpass';
+    riffleFilter.frequency.setValueAtTime(5200, now);
+    riffleFilter.frequency.exponentialRampToValueAtTime(2400, now + riffleDuration);
+    riffleFilter.Q.value = 0.9;
+
+    const riffleGain = ctx.createGain();
+    riffleGain.gain.setValueAtTime(0.34, now);
+    riffleGain.gain.exponentialRampToValueAtTime(0.001, now + riffleDuration);
+
+    riffleSrc.connect(riffleFilter).connect(riffleGain).connect(ctx.destination);
+    riffleSrc.start(now);
+    riffleSrc.stop(now + riffleDuration);
+
+    // --- Phase 2: the settle — a soft, low tap as the page lands flat.
+    // Starts slightly before the riffle fully fades, the way a real
+    // page's edge touches down while it's still finishing its rustle.
+    const settleStart = now + riffleDuration * 0.75;
+    const settleDuration = 0.08;
+    const settleSize = Math.floor(ctx.sampleRate * settleDuration);
+    const settleBuffer = ctx.createBuffer(1, settleSize, ctx.sampleRate);
+    const settleData = settleBuffer.getChannelData(0);
+
+    for (let i = 0; i < settleSize; i++) {
+      const t = i / settleSize;
+      settleData[i] = (Math.random() * 2 - 1) * Math.pow(1 - t, 3);
+    }
+
+    const settleSrc = ctx.createBufferSource();
+    settleSrc.buffer = settleBuffer;
+
+    const settleFilter = ctx.createBiquadFilter();
+    settleFilter.type = 'lowpass';
+    settleFilter.frequency.value = 850;
+
+    const settleGain = ctx.createGain();
+    settleGain.gain.setValueAtTime(0.16, settleStart);
+    settleGain.gain.exponentialRampToValueAtTime(0.001, settleStart + settleDuration);
+
+    settleSrc.connect(settleFilter).connect(settleGain).connect(ctx.destination);
+    settleSrc.start(settleStart);
+    settleSrc.stop(settleStart + settleDuration);
+  }
+
+  // The resize handler calls turnToPage() to restore the reader's
+  // position after rebuilding the book — that's not a real page turn,
+  // so it shouldn't make a sound. This flag tells the flip handler
+  // to skip that one synthetic event.
+  let suppressNextFlipSound = false;
 
   function calcDimensions() {
     const controls = parseInt(
@@ -253,11 +394,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     pageFlip.loadFromHTML(document.querySelectorAll('.page'));
 
     pageFlip.on('flip', (e) => {
+      if (suppressNextFlipSound) {
+        suppressNextFlipSound = false;
+      } else {
+        playFlipSound();
+      }
       markActivePage(e.data);
       updateControls(e.data);
     });
 
     if (startIndex > 0) {
+      suppressNextFlipSound = true;
       pageFlip.turnToPage(startIndex);
     }
 
