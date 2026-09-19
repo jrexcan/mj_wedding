@@ -1,8 +1,8 @@
 {
   "couple": {
-    "partner1": "Mary",
-    "partner2": "J-Rex",
-    "displayDate": "December 18, 2026"
+    "partner1": "Mary Grace",
+    "partner2": "J-Rex Hero",
+    "displayDate": "DECEMBER 18, 2026 | FRIDAY"
   },
 
   "parents": {
@@ -11,24 +11,39 @@
   },
 
   "honorAttendants": {
-    "maidOfHonor": "Maid of Honor Name",
+    "maidOfHonor": "Amazing Grace",
     "bestMan": "Best Man Name"
   },
 
   "principalSponsors": {
     "men": [
-      "Mr. Sponsor One",
-      "Mr. Sponsor Two",
-      "Mr. Sponsor Three",
-      "Mr. Sponsor Four",
-      "Mr. Sponsor Five"
+      "Mr. Rod Pagsolingan",
+      "Dr. Ricardo Valdez",
+      "LTGEN John Bonafos AFP(RET)",
+      "Mr. Venier Vistro",
+      "Ptr. Jose Roque",
+      "Ptr. Randy Mendoza",
+      "Ptr. Ariel Gavarra",
+      "Ptr. Ricardo David",
+      "Arch. Wilcon Ligaray",
+      "Mr. Oscar Vinuya",
+      "Mr. Edwin Sibayan"
     ],
     "women": [
-      "Mrs. Sponsor One",
-      "Mrs. Sponsor Two",
-      "Mrs. Sponsor Three",
-      "Mrs. Sponsor Four",
-      "Mrs. Sponsor Five"
+      "Mrs. Cela Pagsolingan",
+      "Dr. Ingrid Valdez",
+      "Dr. Ma. Luina Bonafos",
+      "Mrs. Emily Pine",
+      "Mrs. Nancy Roque",
+      "Mrs. Faye Mendoza",
+      "Mrs. Jasmin Camba",
+      "Ptra. Jeanmiracle De Guzman",
+      "Dr. Sheridan Manamtam",
+      "Mrs. Maretis Ratonel",
+      "Mrs. Florencia Sibayan",
+      "Mrs. Nancy Diaz",
+      "Mrs. Perla Guiao"
+
     ]
   },
 
@@ -67,5 +82,5 @@
     "mapUrl": "https://maps.google.com/maps?q=WestFarm+Resort+Hotel&ftid=0x3391459801473d6f:0x765c31a6cefb3343"
   },
 
-  "rsvpDeadline": "May 1, 2026"
+  "rsvpDeadline": "November 15, 2026"
 }

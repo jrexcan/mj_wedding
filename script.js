@@ -61,10 +61,10 @@ function applyWeddingData(data) {
 
   // Cover + celebration date
   if (data.couple) {
-    if (data.couple.partner1 && data.couple.partner2) {
-      set('couple-names',
-        `${escapeHtml(data.couple.partner1)} <span class="amp">&amp;</span> ${escapeHtml(data.couple.partner2)}`);
-    }
+    // if (data.couple.partner1 && data.couple.partner2) {
+    //   set('couple-names',
+    //     `${escapeHtml(data.couple.partner1)} <span class="amp">&amp;</span> ${escapeHtml(data.couple.partner2)}`);
+    // }
     if (data.couple.displayDate) {
       document.querySelectorAll('.js-wedding-date')
         .forEach((el) => { el.textContent = data.couple.displayDate; });
@@ -75,9 +75,9 @@ function applyWeddingData(data) {
   if (data.parents && data.honorAttendants) {
     set('parents-honors', `
       <p class="role-title">Parents of the groom</p>
-      <p>${escapeHtml(data.parents.groom.join(' &amp; '))}</p>
+      <p>${escapeHtml(data.parents.groom.join(' & '))}</p>
       <p class="role-title">Parents of the bride</p>
-      <p>${escapeHtml(data.parents.bride.join(' &amp; '))}</p>
+      <p>${escapeHtml(data.parents.bride.join(' & '))}</p>
       <div class="divider-small"></div>
       <p class="role-title">Maid of honor</p>
       <p>${escapeHtml(data.honorAttendants.maidOfHonor)}</p>
