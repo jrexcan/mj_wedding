@@ -1,4 +1,8 @@
 {
+  "thumbnails": {
+    "enabled": false,
+    "folder": "photos/thumbs/"
+  },
   "pageBackgrounds": {
     "cover": "photos/g1.jpg",
     "celebration": "photos/p13.jpg",
