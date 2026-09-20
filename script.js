@@ -30,7 +30,7 @@ const RSVP_METHOD = 'local'; // 'formspree' | 'endpoint' | 'netlify' | 'local'
 const FORMSPREE_ENDPOINT = ''; // e.g. 'https://formspree.io/f/abcdwxyz'
 const RSVP_ENDPOINT = '';      // Google Apps Script URL, only used when RSVP_METHOD is 'endpoint'
 
-const TOTAL_PAGES = 9;
+const TOTAL_PAGES = 11;
 
 function escapeHtml(value) {
   return String(value ?? '').replace(/[&<>"']/g, (c) => ({
@@ -163,6 +163,95 @@ function applyWeddingData(data) {
   }
 }
 
+/* ============================================================
+   Photos — page backgrounds and the two gallery pages all read
+   from photos.json, so every image URL lives in one editable
+   place instead of being buried in CSS or HTML.
+   ============================================================ */
+
+// Overlay opacity per background, matching what each page originally
+// shipped with in styles.css — kept here so a JSON-supplied URL still
+// gets the right amount of white wash over it.
+const BG_OVERLAY_OPACITY = {
+  cover: 0.86,
+  celebration: 0.88,
+  parents: 0.9,
+  sponsors: 0.9,
+  bridalParty: 0.9,
+  littleAttendants: 0.9,
+  schedule: 0.9,
+  dressCode: 0.9,
+  galleryOne: 0.9,
+  galleryTwo: 0.9,
+  rsvp: 0.9
+};
+
+async function loadPhotosData() {
+  try {
+    const res = await fetch('photos.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return await res.json();
+  } catch (err) {
+    // Common cause: opened as a local file:// page instead of served
+    // over http(s). The existing CSS backgrounds and the hardcoded
+    // placeholder photos already in index.html are left untouched.
+    console.warn('photos.json could not be loaded — keeping the built-in backgrounds and gallery photos.', err);
+    return null;
+  }
+}
+
+function applyPageBackgrounds(pageBackgrounds) {
+  if (!pageBackgrounds) return;
+  Object.keys(pageBackgrounds).forEach((key) => {
+    const url = pageBackgrounds[key];
+    if (!url) return; // empty string means "no photo, plain background" — leave it alone
+    const el = document.querySelector(`[data-bg-key="${key}"]`);
+    if (!el) return;
+    const opacity = BG_OVERLAY_OPACITY[key] ?? 0.9;
+    el.style.backgroundImage =
+      `linear-gradient(rgba(255, 255, 255, ${opacity}), rgba(255, 255, 255, ${opacity})), url('${url}')`;
+    el.style.backgroundSize = 'cover';
+    el.style.backgroundPosition = 'center';
+  });
+}
+
+function renderGalleryGrid(gridId, photos) {
+  const grid = document.getElementById(gridId);
+  if (!grid || !Array.isArray(photos) || !photos.length) return;
+
+  grid.innerHTML = photos.map((p) =>
+    `<button type="button" class="gallery-item" data-src="${escapeHtml(p.src)}">
+      <img src="${escapeHtml(p.src)}" alt="${escapeHtml(p.alt || '')}" loading="lazy" />
+    </button>`
+  ).join('');
+}
+
+function applyGalleryData(gallery) {
+  if (!gallery) return;
+
+  const set = (id, text) => {
+    const el = document.getElementById(id);
+    if (el && text) el.textContent = text;
+  };
+
+  if (gallery.pageOne) {
+    set('gallery-one-title', gallery.pageOne.title);
+    set('gallery-one-caption', gallery.pageOne.caption);
+    renderGalleryGrid('gallery-one-grid', gallery.pageOne.photos);
+  }
+  if (gallery.pageTwo) {
+    set('gallery-two-title', gallery.pageTwo.title);
+    set('gallery-two-caption', gallery.pageTwo.caption);
+    renderGalleryGrid('gallery-two-grid', gallery.pageTwo.photos);
+  }
+}
+
+function applyPhotosData(photos) {
+  if (!photos) return; // keep whatever is already in the HTML/CSS
+  applyPageBackgrounds(photos.pageBackgrounds);
+  applyGalleryData(photos.gallery);
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   // Kick this off immediately so it's downloaded well before the
   // first flip — decoding happens later, once an AudioContext exists.
@@ -182,6 +271,14 @@ document.addEventListener('DOMContentLoaded', async () => {
      --------------------------------------------------------- */
   const weddingData = await loadWeddingData();
   applyWeddingData(weddingData);
+
+  /* ---------------------------------------------------------
+     Page backgrounds & gallery photos — loaded from photos.json.
+     Runs before the flipbook builds so the resize/rebuild logic
+     backs up pages that already have their real photos in place.
+     --------------------------------------------------------- */
+  const photosData = await loadPhotosData();
+  applyPhotosData(photosData);
 
   /* ---------------------------------------------------------
      Flipbook
@@ -420,6 +517,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   nextBtn.addEventListener('click', () => pageFlip && pageFlip.flipNext());
 
   document.addEventListener('keydown', (e) => {
+    // While the lightbox is open, arrows browse photos and Escape
+    // closes it — none of that should also flip the book underneath.
+    if (lightbox && !lightbox.hidden) {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showLightboxPhoto(lightboxIndex - 1);
+      if (e.key === 'ArrowRight') showLightboxPhoto(lightboxIndex + 1);
+      return;
+    }
+
     if (!pageFlip) return;
     const typing = ['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement.tagName);
     if (typing) return;
@@ -488,6 +594,62 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   /* ---------------------------------------------------------
+     Photo lightbox — opens on a gallery photo tap, navigates
+     within whichever page's set of photos it was opened from.
+     --------------------------------------------------------- */
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
+
+  let lightboxPhotos = [];
+  let lightboxIndex = 0;
+
+  function showLightboxPhoto(index) {
+    if (!lightboxPhotos.length) return;
+    lightboxIndex = (index + lightboxPhotos.length) % lightboxPhotos.length; // wrap around
+    const item = lightboxPhotos[lightboxIndex];
+    lightboxImg.src = item.src;
+    lightboxImg.alt = item.alt || '';
+  }
+
+  function openLightbox(photos, index) {
+    lightboxPhotos = photos;
+    showLightboxPhoto(index);
+    lightbox.hidden = false;
+  }
+
+  function closeLightbox() {
+    lightbox.hidden = true;
+    lightboxImg.src = '';
+  }
+
+  // Delegate from each gallery grid: works for both the placeholder
+  // markup already in the HTML and whatever photos.json re-renders.
+  document.querySelectorAll('.gallery-grid').forEach((grid) => {
+    grid.addEventListener('click', (e) => {
+      const btn = e.target.closest('.gallery-item');
+      if (!btn) return;
+      const items = Array.from(grid.querySelectorAll('.gallery-item'));
+      const photos = items.map((el) => ({
+        src: el.dataset.src,
+        alt: el.querySelector('img')?.alt || ''
+      }));
+      openLightbox(photos, items.indexOf(btn));
+    });
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', () => showLightboxPhoto(lightboxIndex - 1));
+  lightboxNext.addEventListener('click', () => showLightboxPhoto(lightboxIndex + 1));
+
+  // Clicking the dark backdrop (not the image or a button) closes it.
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  /* ---------------------------------------------------------
      RSVP
      --------------------------------------------------------- */
   const form = document.getElementById('rsvp-form');
@@ -502,9 +664,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   const guestsGroup = document.getElementById('guests-group');
 
   // Page-flip listens for drags anywhere in the book. Without this,
-  // tapping a field can start a page turn instead of focusing it.
+  // tapping a field — or a gallery photo — can start a page turn
+  // instead of registering as a click.
   ['mousedown', 'touchstart', 'pointerdown'].forEach((evt) => {
     shell.addEventListener(evt, (e) => e.stopPropagation(), { passive: true });
+  });
+  document.querySelectorAll('.gallery-grid').forEach((grid) => {
+    ['mousedown', 'touchstart', 'pointerdown'].forEach((evt) => {
+      grid.addEventListener(evt, (e) => e.stopPropagation(), { passive: true });
+    });
   });
 
   // Guest count is meaningless for a decline.

@@ -1,7 +1,6 @@
 # Setup
 
-Five files: `index.html`, `styles.css`, `script.js`, `data.json`, `rsvp-backend.gs`.
-Keep the first four in the same folder. The `.gs` file goes into Google, not the folder.
+Six files plus a folder: `index.html`, `styles.css`, `script.js`, `data.json`, `photos.json`, `rsvp-backend.gs`, and a `photos/` folder holding the gallery images. Keep everything except `rsvp-backend.gs` together — that one goes into Google, not the folder.
 
 Out of the box the invitation works, but replies only save to the guest's own browser and the page says so. Do step 1 to start collecting real RSVPs.
 
@@ -30,10 +29,26 @@ Add or remove entries freely — e.g. a 6th principal sponsor pair, or a 5th bri
 
 ---
 
+## 0b. Edit the gallery photos and page backgrounds
+
+`photos.json` is the second data file — separate from `data.json` because it's about images, not names. It has two parts:
+
+**`pageBackgrounds`** — one entry per page, using the URL of the photo behind it. All 9 original pages keep their existing Unsplash photos by default; the two new gallery pages start with `""` (empty), which means a plain white background rather than a photo — sensible since those pages are already full of your actual photos. Set any of these to your own image path (e.g. `"photos/venue.jpg"`) or leave a page as `""` for no background photo at all.
+
+**`gallery`** — the two new pages, each with a `title`, a `caption`, and a `photos` array. Each photo is `{ "src": "photos/gallery-01.jpg", "alt": "" }`. Add, remove, or reorder entries freely; the grid and the lightbox both follow whatever's listed. `alt` is optional but worth filling in — it's read aloud by screen readers and shows if an image fails to load.
+
+**The `photos/` folder** is where the actual image files live, sitting next to `index.html`. Twelve placeholder images are already in there for each gallery page (`gallery-01.jpg` … `gallery-12.jpg`, and `prenup-01.jpg` … `prenup-12.jpg`) — plain navy placeholders labeled "Photo 1", "Photo 2", and so on. Replace them with your real photos **using the exact same filenames** and the gallery updates automatically, no JSON edit needed. To add even more photos to a page, save the new file into `photos/` and add a matching line to that page's `photos` array in `photos.json` — the grid isn't hardcoded to any particular count, so it renders however many are listed.
+
+Keep photos reasonably sized — under about 400 KB each — since guests will often be opening this on mobile data. Any image editor or a free tool like squoosh.app can shrink a photo without a visible quality loss.
+
+On the invitation itself: **tap or click any gallery photo to open it full-screen** (with the previous/next arrows or the arrow keys to browse, and Escape or tapping outside the photo to close). **Hovering a photo** on desktop darkens it slightly and shows a small expand icon, signaling it's clickable.
+
+---
+
 ## 1. Put it on GitHub Pages
 
 1. Create a new GitHub repository (public, unless you're on a paid plan that allows private Pages sites).
-2. Add all five files to it — `index.html`, `styles.css`, `script.js`, `data.json`, `rsvp-backend.gs` — either by dragging them into the GitHub web UI or with `git push`.
+2. Add everything to it — `index.html`, `styles.css`, `script.js`, `data.json`, `photos.json`, `rsvp-backend.gs`, and the whole `photos/` folder — either by dragging them into the GitHub web UI or with `git push`.
 3. In the repo: **Settings → Pages**. Under "Build and deployment", set **Source** to **Deploy from a branch**, pick your branch (usually `main`) and the `/ (root)` folder, then **Save**.
 4. GitHub gives you a URL like `https://yourusername.github.io/your-repo-name/`. It can take a minute or two to go live the first time.
 
@@ -129,3 +144,5 @@ If you host your own photo alongside the site (an `images/` folder next to `inde
 - The original Unsplash background photos are back on every page, with the navy overlay preserved.
 - All names, entourage roles, schedule, and venue details moved out of the HTML into `data.json`, so they can be edited without touching any code.
 - The RSVP backend is now switchable (`RSVP_METHOD` in `script.js`): Formspree for GitHub Pages, a Google Sheet, Netlify Forms if hosted there instead, or local-only — one line to change, no other code to touch.
+- Added two gallery pages ("Our Gallery" and "Prenup Photos"). Tapping a photo opens it full-screen with previous/next and Escape-to-close; hovering shows a darken + expand-icon hint. Every photo, on both pages, and every page's background photo now live in `photos.json` — a new file, separate from `data.json` — so images can be swapped without touching HTML or CSS. Actual image files live in a new `photos/` folder, currently filled with labeled placeholders.
+- Fixed the page-flip sound lookup, which had been changed to request `page-flip.mp3` while the actual file is `page-flip.wav` — it was silently always falling back to the synthesized sound instead of playing your recording.

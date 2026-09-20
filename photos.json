@@ -1,0 +1,125 @@
+{
+  "pageBackgrounds": {
+    "cover": "photos/g1.jpg",
+    "celebration": "photos/p13.jpg",
+    "parents": "photos/p16.jpg",
+    "sponsors": "photos/g5.jpg",
+    "bridalParty": "photos/g12.jpg",
+    "littleAttendants": "photos/p17.jpg",
+    "schedule": "photos/p12.jpg",
+    "dressCode": "photos/p22.jpg",
+    "galleryOne": "",
+    "galleryTwo": "",
+    "rsvp": "photos/p18.jpg"
+  },
+  "gallery": {
+    "pageOne": {
+      "title": "Our Gallery",
+      "caption": "A few of our favorite moments together",
+      "photos": [
+        {
+          "src": "photos/g1.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/g2.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/g3.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/g4.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/g5.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/g6.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/g7.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/g8.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/g9.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/g10.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/g11.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/g12.jpg",
+          "alt": ""
+        }
+      ]
+    },
+    "pageTwo": {
+      "title": "Prenup Photos",
+      "caption": "From our prenup shoot",
+      "photos": [
+        {
+          "src": "photos/p1.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/p2.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/p3.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/p4.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/p5.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/p6.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/p7.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/p8.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/p9.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/p10.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/p11.jpg",
+          "alt": ""
+        },
+        {
+          "src": "photos/p12.jpg",
+          "alt": ""
+        }
+      ]
+    }
+  }
+}
