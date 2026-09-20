@@ -34,7 +34,7 @@
 
       <!-- 1 — Cover -->
       <div class="page hard" data-density="hard">
-        <div class="page-content cover-page bg-cover">
+        <div class="page-content cover-page bg-cover" data-bg-key="cover">
           <p class="announcement">BY THE GRACE OF GOD</p>
           <p class="announcement">AND TOGETHER WITH OUR FAMILES.</p>
           <p class="announcement">WE.</p>
@@ -51,7 +51,7 @@
 
       <!-- 2 — Celebration -->
       <div class="page">
-        <div class="page-content bg-two">
+        <div class="page-content bg-two" data-bg-key="celebration">
           <div class="image-overlay-text">
             <h2>The celebration</h2>
             <p>Join us as we exchange vows and begin our new chapter together.</p>
@@ -62,7 +62,7 @@
 
       <!-- 3 — Parents &amp; honors -->
       <div class="page">
-        <div class="page-content text-page bg-three">
+        <div class="page-content text-page bg-three" data-bg-key="parents">
           <h2>Parents &amp; honors</h2>
           <div class="entourage-section" id="parents-honors">
             <p class="role-title">Parents of the groom</p>
@@ -84,7 +84,7 @@
 
       <!-- 4 — Principal sponsors -->
       <div class="page">
-        <div class="page-content text-page bg-four">
+        <div class="page-content text-page bg-four" data-bg-key="sponsors">
           <h2>Principal sponsors</h2>
           <p class="section-desc">To guide us in our journey</p>
           <div class="two-column-list" id="principal-sponsors-list">
@@ -108,7 +108,7 @@
 
       <!-- 5 — Bridal party -->
       <div class="page">
-        <div class="page-content text-page bg-five">
+        <div class="page-content text-page bg-five" data-bg-key="bridalParty">
           <h2>Bridal party</h2>
           <div id="secondary-sponsors-list">
             <p class="role-title">Candle sponsors</p>
@@ -135,7 +135,7 @@
 
       <!-- 6 — Little attendants -->
       <div class="page">
-        <div class="page-content text-page bg-six">
+        <div class="page-content text-page bg-six" data-bg-key="littleAttendants">
           <h2>Little attendants</h2>
 
           <p class="role-title">Flower girls</p>
@@ -166,7 +166,7 @@
 
       <!-- 7 — Schedule &amp; venue -->
       <div class="page">
-        <div class="page-content text-page bg-seven">
+        <div class="page-content text-page bg-seven" data-bg-key="schedule">
           <h2>Schedule &amp; venue</h2>
           <div class="timeline" id="schedule-list">
             <div class="event"><span class="time">3:00 PM</span><span class="desc">Wedding ceremony</span></div>
@@ -185,7 +185,7 @@
 
       <!-- 8 — Dress code -->
       <div class="page">
-        <div class="page-content text-page bg-eight">
+        <div class="page-content text-page bg-eight" data-bg-key="dressCode">
           <h2>Dress code</h2>
           <p><strong>Formal / semi-formal</strong></p>
           <p class="palette-desc">Navy blue &amp; pure white</p>
@@ -198,9 +198,53 @@
         </div>
       </div>
 
-      <!-- 9 — RSVP -->
+      <!-- 9 — Gallery, page one -->
+      <div class="page">
+        <div class="page-content text-page gallery-page" data-bg-key="galleryOne">
+          <h2 id="gallery-one-title">Our Gallery</h2>
+          <p class="section-desc" id="gallery-one-caption">A few of our favorite moments together</p>
+          <div class="gallery-grid" id="gallery-one-grid">
+            <button type="button" class="gallery-item" data-src="photos/gallery-01.jpg"><img src="photos/gallery-01.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-02.jpg"><img src="photos/gallery-02.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-03.jpg"><img src="photos/gallery-03.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-04.jpg"><img src="photos/gallery-04.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-05.jpg"><img src="photos/gallery-05.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-06.jpg"><img src="photos/gallery-06.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-07.jpg"><img src="photos/gallery-07.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-08.jpg"><img src="photos/gallery-08.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-09.jpg"><img src="photos/gallery-09.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-10.jpg"><img src="photos/gallery-10.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-11.jpg"><img src="photos/gallery-11.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-12.jpg"><img src="photos/gallery-12.jpg" alt="" loading="lazy" /></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10 — Gallery, page two (prenup) -->
+      <div class="page">
+        <div class="page-content text-page gallery-page" data-bg-key="galleryTwo">
+          <h2 id="gallery-two-title">Prenup Photos</h2>
+          <p class="section-desc" id="gallery-two-caption">From our prenup shoot</p>
+          <div class="gallery-grid" id="gallery-two-grid">
+            <button type="button" class="gallery-item" data-src="photos/prenup-01.jpg"><img src="photos/prenup-01.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-02.jpg"><img src="photos/prenup-02.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-03.jpg"><img src="photos/prenup-03.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-04.jpg"><img src="photos/prenup-04.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-05.jpg"><img src="photos/prenup-05.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-06.jpg"><img src="photos/prenup-06.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-07.jpg"><img src="photos/prenup-07.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-08.jpg"><img src="photos/prenup-08.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-09.jpg"><img src="photos/prenup-09.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-10.jpg"><img src="photos/prenup-10.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-11.jpg"><img src="photos/prenup-11.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-12.jpg"><img src="photos/prenup-12.jpg" alt="" loading="lazy" /></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11 — RSVP -->
       <div class="page hard" data-density="hard">
-        <div class="page-content rsvp-page bg-nine">
+        <div class="page-content rsvp-page bg-nine" data-bg-key="rsvp">
           <h2>RSVP</h2>
           <p class="rsvp-deadline" id="rsvp-deadline-text">Kindly reply by May 1, 2026</p>
 
@@ -257,8 +301,17 @@
 
   <div class="flipbook-controls">
     <button id="prev-btn" type="button" aria-label="Previous page">Prev</button>
-    <span id="page-num" aria-live="polite">1 of 9</span>
+    <span id="page-num" aria-live="polite">1 of 11</span>
     <button id="next-btn" type="button" aria-label="Next page">Next</button>
+  </div>
+
+  <!-- Photo lightbox. Lives outside #flipbook so page-flip's drag
+       handling never intercepts taps on its controls. -->
+  <div id="lightbox" class="lightbox" hidden>
+    <button type="button" id="lightbox-close" class="lightbox-btn lightbox-close" aria-label="Close photo">&times;</button>
+    <button type="button" id="lightbox-prev" class="lightbox-btn lightbox-nav lightbox-prev" aria-label="Previous photo">&lsaquo;</button>
+    <img id="lightbox-img" class="lightbox-img" src="" alt="" />
+    <button type="button" id="lightbox-next" class="lightbox-btn lightbox-nav lightbox-next" aria-label="Next photo">&rsaquo;</button>
   </div>
 
   <script src="script.js"></script>
