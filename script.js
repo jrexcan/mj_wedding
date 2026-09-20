@@ -40,7 +40,7 @@ function escapeHtml(value) {
 
 async function loadWeddingData() {
   try {
-    const res = await fetch('data.json', { cache: 'no-store' });
+    const res = await fetch('data.json', { cache: 'no-cache' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     return await res.json();
   } catch (err) {
@@ -75,9 +75,9 @@ function applyWeddingData(data) {
   if (data.parents && data.honorAttendants) {
     set('parents-honors', `
       <p class="role-title">Parents of the groom</p>
-      <p>${escapeHtml(data.parents.groom.join(' &amp; '))}</p>
+      <p>${escapeHtml(data.parents.groom.join(' & '))}</p>
       <p class="role-title">Parents of the bride</p>
-      <p>${escapeHtml(data.parents.bride.join(' &amp; '))}</p>
+      <p>${escapeHtml(data.parents.bride.join(' & '))}</p>
       <div class="divider-small"></div>
       <p class="role-title">Maid of honor</p>
       <p>${escapeHtml(data.honorAttendants.maidOfHonor)}</p>
@@ -188,42 +188,112 @@ const BG_OVERLAY_OPACITY = {
 
 async function loadPhotosData() {
   try {
-    const res = await fetch('photos.json', { cache: 'no-store' });
+    const res = await fetch('photos.json', { cache: 'no-cache' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     return await res.json();
   } catch (err) {
     // Common cause: opened as a local file:// page instead of served
-    // over http(s). The existing CSS backgrounds and the hardcoded
-    // placeholder photos already in index.html are left untouched.
-    console.warn('photos.json could not be loaded — keeping the built-in backgrounds and gallery photos.', err);
+    // over http(s). Pages keep their plain white background and the
+    // gallery falls back to the filenames already in index.html.
+    console.warn('photos.json could not be loaded — keeping the built-in gallery photos.', err);
     return null;
   }
 }
 
-function applyPageBackgrounds(pageBackgrounds) {
-  if (!pageBackgrounds) return;
-  Object.keys(pageBackgrounds).forEach((key) => {
-    const url = pageBackgrounds[key];
-    if (!url) return; // empty string means "no photo, plain background" — leave it alone
-    const el = document.querySelector(`[data-bg-key="${key}"]`);
-    if (!el) return;
-    const opacity = BG_OVERLAY_OPACITY[key] ?? 0.9;
-    el.style.backgroundImage =
-      `linear-gradient(rgba(255, 255, 255, ${opacity}), rgba(255, 255, 255, ${opacity})), url('${url}')`;
-    el.style.backgroundSize = 'cover';
-    el.style.backgroundPosition = 'center';
+/* ------------------------------------------------------------
+   Image loading
+
+   Every page of a flipbook is technically on screen, so the
+   browser treats all of them as visible and loading="lazy" holds
+   nothing back — left alone, a phone opening the cover starts
+   downloading eleven backgrounds and twenty-four gallery photos
+   at once, and the cover is last in that queue.
+
+   So: nothing loads by itself. Backgrounds and gallery photos are
+   requested one page ahead of the reader, and whatever is left
+   fills in during idle time. No image is resized or re-encoded —
+   this only changes when each file is asked for.
+   ------------------------------------------------------------ */
+
+const bgSources = {};       // bg key -> url, from photos.json
+let thumbConfig = null;     // optional smaller files for the grid
+
+// Where a background lives depends on which page it's on, so the grid
+// and the backgrounds share one "warm these pages" pass.
+function setBackgroundSources(pageBackgrounds) {
+  Object.assign(bgSources, pageBackgrounds || {});
+}
+
+function thumbFor(src) {
+  if (!thumbConfig || !thumbConfig.enabled || !thumbConfig.folder) return null;
+  const file = String(src).split('/').pop();
+  if (!file) return null;
+  const folder = thumbConfig.folder.endsWith('/') ? thumbConfig.folder : thumbConfig.folder + '/';
+  return folder + file;
+}
+
+// Swap a held-back image into a real request. The full-size file is kept
+// on the button, so the lightbox always opens the original.
+function loadImagesIn(root) {
+  if (!root) return;
+  root.querySelectorAll('img[data-src]').forEach((img) => {
+    const src = img.dataset.src;
+    const fallback = img.dataset.fallback;
+    delete img.dataset.src;
+
+    img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
+    if (fallback) {
+      // A thumbnail folder that doesn't exist yet shouldn't blank the grid.
+      img.addEventListener('error', function onErr() {
+        img.removeEventListener('error', onErr);
+        img.src = fallback;
+      });
+    }
+
+    img.src = src;
+    if (img.complete && img.naturalWidth) img.classList.add('is-loaded');
   });
+}
+
+function applyBackgroundFor(pageEl) {
+  if (!pageEl) return;
+  const content = pageEl.querySelector('[data-bg-key]');
+  if (!content || content.dataset.bgState) return;
+  content.dataset.bgState = 'pending';
+
+  const key = content.dataset.bgKey;
+  const url = bgSources[key];
+  if (!url) { content.dataset.bgState = 'none'; return; } // "" means plain background
+
+  const opacity = BG_OVERLAY_OPACITY[key] ?? 0.9;
+  const wash = `linear-gradient(rgba(255, 255, 255, ${opacity}), rgba(255, 255, 255, ${opacity}))`;
+
+  // Decode first, then paint — a half-drawn background photo sliding in
+  // mid-flip is more distracting than the page arriving a beat plain.
+  const probe = new Image();
+  probe.decoding = 'async';
+  probe.onload = () => {
+    content.style.backgroundImage = `${wash}, url('${url}')`;
+    content.dataset.bgState = 'done';
+  };
+  probe.onerror = () => { content.dataset.bgState = 'failed'; };
+  probe.src = url;
 }
 
 function renderGalleryGrid(gridId, photos) {
   const grid = document.getElementById(gridId);
   if (!grid || !Array.isArray(photos) || !photos.length) return;
 
-  grid.innerHTML = photos.map((p) =>
-    `<button type="button" class="gallery-item" data-src="${escapeHtml(p.src)}">
-      <img src="${escapeHtml(p.src)}" alt="${escapeHtml(p.alt || '')}" loading="lazy" />
-    </button>`
-  ).join('');
+  grid.innerHTML = photos.map((p) => {
+    const full = escapeHtml(p.src);
+    const thumb = thumbFor(p.src);
+    const shown = thumb ? escapeHtml(thumb) : full;
+    const fallbackAttr = thumb ? ` data-fallback="${full}"` : '';
+    return `<button type="button" class="gallery-item" data-src="${full}">
+      <img data-src="${shown}"${fallbackAttr} alt="${escapeHtml(p.alt || '')}"
+           width="400" height="400" decoding="async" loading="lazy" />
+    </button>`;
+  }).join('');
 }
 
 function applyGalleryData(gallery) {
@@ -247,20 +317,29 @@ function applyGalleryData(gallery) {
 }
 
 function applyPhotosData(photos) {
-  if (!photos) return; // keep whatever is already in the HTML/CSS
-  applyPageBackgrounds(photos.pageBackgrounds);
+  if (!photos) return; // keep whatever is already in the HTML
+  thumbConfig = photos.thumbnails || null;
+  setBackgroundSources(photos.pageBackgrounds);
   applyGalleryData(photos.gallery);
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
   // Kick this off immediately so it's downloaded well before the
   // first flip — decoding happens later, once an AudioContext exists.
-  const flipSoundArrayBufferPromise = fetch('page-flip.mp3')
-    .then((res) => { if (!res.ok) throw new Error('HTTP ' + res.status); return res.arrayBuffer(); })
-    .catch((err) => {
-      console.warn('page-flip.wav not found — falling back to the synthesized flip sound.', err);
-      return null;
-    });
+  // Tries the .wav first (that's the filename SETUP.md documents), then
+  // .mp3, so whichever one is actually sitting in the folder gets used
+  // instead of silently falling through to the synthesized swish.
+  const fetchFlipSound = async () => {
+    for (const name of ['page-flip.wav', 'page-flip.mp3']) {
+      try {
+        const res = await fetch(name);
+        if (res.ok) return await res.arrayBuffer();
+      } catch (_) { /* try the next extension */ }
+    }
+    console.warn('No page-flip.wav or .mp3 found — using the synthesized flip sound.');
+    return null;
+  };
+  const flipSoundArrayBufferPromise = fetchFlipSound();
 
   /* ---------------------------------------------------------
      Names, entourage & venue — loaded from data.json so the
@@ -269,7 +348,12 @@ document.addEventListener('DOMContentLoaded', async () => {
      without a server), the placeholder text already in the HTML
      is left exactly as it is.
      --------------------------------------------------------- */
-  const weddingData = await loadWeddingData();
+  // Both files are small and independent, so they go out together rather
+  // than one waiting on the other.
+  const [weddingData, photosData] = await Promise.all([
+    loadWeddingData(),
+    loadPhotosData()
+  ]);
   applyWeddingData(weddingData);
 
   /* ---------------------------------------------------------
@@ -277,7 +361,6 @@ document.addEventListener('DOMContentLoaded', async () => {
      Runs before the flipbook builds so the resize/rebuild logic
      backs up pages that already have their real photos in place.
      --------------------------------------------------------- */
-  const photosData = await loadPhotosData();
   applyPhotosData(photosData);
 
   /* ---------------------------------------------------------
@@ -295,6 +378,37 @@ document.addEventListener('DOMContentLoaded', async () => {
   const pagesBackup = Array.from(document.querySelectorAll('.page'));
 
   const isMobile = () => window.innerWidth < 768;
+
+  /* Request the photos for the page in front of the reader and the one
+     or two just past it. pagesBackup holds the original nodes, so this
+     keeps working after a resize rebuild. */
+  const WARM_BEHIND = 1;
+  const WARM_AHEAD = 2;
+
+  function warmPages(index) {
+    const first = Math.max(0, index - WARM_BEHIND);
+    const last = Math.min(pagesBackup.length - 1, index + WARM_AHEAD);
+    for (let i = first; i <= last; i++) {
+      applyBackgroundFor(pagesBackup[i]);
+      loadImagesIn(pagesBackup[i]);
+    }
+  }
+
+  /* Once the opening pages are in hand, quietly fill in the rest so
+     flipping ahead is instant. Idle time only — this never competes
+     with the page the reader is actually looking at. */
+  function warmRemaining() {
+    const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 1200));
+    let i = 0;
+    const step = () => {
+      if (i >= pagesBackup.length) return;
+      applyBackgroundFor(pagesBackup[i]);
+      loadImagesIn(pagesBackup[i]);
+      i++;
+      idle(step, { timeout: 2000 });
+    };
+    idle(step, { timeout: 2500 });
+  }
 
   /* ---------------------------------------------------------
      Page-flip sound. Plays the real recording (page-flip.wav)
@@ -498,6 +612,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
       markActivePage(e.data);
       updateControls(e.data);
+      warmPages(e.data);
     });
 
     if (startIndex > 0) {
@@ -508,10 +623,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     requestAnimationFrame(() => {
       markActivePage(startIndex);
       updateControls(startIndex);
+      warmPages(startIndex);
     });
   }
 
   buildFlipbook(0);
+  warmRemaining();
 
   prevBtn.addEventListener('click', () => pageFlip && pageFlip.flipPrev());
   nextBtn.addEventListener('click', () => pageFlip && pageFlip.flipNext());
@@ -569,9 +686,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   const musicLabel = musicBtn.querySelector('.music-label');
 
   // Only offer the button if the file actually loads.
-  music.addEventListener('canplay', () => { musicBtn.hidden = false; }, { once: true });
+  const showMusicBtn = () => { musicBtn.hidden = false; };
+  music.addEventListener('loadedmetadata', showMusicBtn, { once: true });
+  music.addEventListener('canplay', showMusicBtn, { once: true });
   music.addEventListener('error', () => { musicBtn.hidden = true; });
-  music.load();
+  // Deferred so the track's metadata isn't competing with the cover photo.
+  setTimeout(() => music.load(), 800);
 
   // Drive the label from the element's own state so it can never desync.
   music.addEventListener('play', () => {
@@ -612,6 +732,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     const item = lightboxPhotos[lightboxIndex];
     lightboxImg.src = item.src;
     lightboxImg.alt = item.alt || '';
+    preloadNeighbours(lightboxIndex);
+  }
+
+  // The full-size file is only requested when a photo is opened, so fetch
+  // the two either side now — arrowing through then feels immediate.
+  function preloadNeighbours(index) {
+    [index - 1, index + 1].forEach((n) => {
+      const item = lightboxPhotos[(n + lightboxPhotos.length) % lightboxPhotos.length];
+      if (!item || !item.src) return;
+      const img = new Image();
+      img.decoding = 'async';
+      img.src = item.src;
+    });
   }
 
   function openLightbox(photos, index) {

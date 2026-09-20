@@ -15,7 +15,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <script defer src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+  <script defer src="script.js"></script>
 </head>
 <body>
 
@@ -23,7 +25,7 @@
     Music: drop an mp3 next to this file and name it music.mp3.
     If the file is missing the button hides itself automatically.
   -->
-  <audio id="bg-music" loop preload="none" src="music.weba"></audio>
+  <audio id="bg-music" loop preload="metadata" src="music.weba"></audio>
   <button id="music-btn" class="music-toggle" type="button" aria-pressed="false" hidden>
     <span class="music-icon" aria-hidden="true">♪</span>
     <span class="music-label">Play music</span>
@@ -38,9 +40,9 @@
           <p class="announcement">BY THE GRACE OF GOD</p>
           <p class="announcement">AND TOGETHER WITH OUR FAMILES.</p>
           <p class="announcement">WE.</p>
-          <h1 id="couple-names">Mary Grace</h1>
-          <h1 id="couple-names"><span class="amp">&amp;</span></h1>
-          <h1 id="couple-names">J-Rex Hero</h1>
+          <h1 class="couple-name">Mary Grace</h1>
+          <h1 class="couple-name"><span class="amp">&amp;</span></h1>
+          <h1 class="couple-name">J-Rex Hero</h1>
           <div class="divider"></div>
           <p class="subtitle">REQUEST THE HONOR OF YOUR PRESENCE</p>
           <p class="subtitle">AT THE  CELEBRATION OF OUR MARRIAGE</p>
@@ -204,18 +206,18 @@
           <h2 id="gallery-one-title">Our Gallery</h2>
           <p class="section-desc" id="gallery-one-caption">A few of our favorite moments together</p>
           <div class="gallery-grid" id="gallery-one-grid">
-            <button type="button" class="gallery-item" data-src="photos/gallery-01.jpg"><img src="photos/gallery-01.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/gallery-02.jpg"><img src="photos/gallery-02.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/gallery-03.jpg"><img src="photos/gallery-03.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/gallery-04.jpg"><img src="photos/gallery-04.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/gallery-05.jpg"><img src="photos/gallery-05.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/gallery-06.jpg"><img src="photos/gallery-06.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/gallery-07.jpg"><img src="photos/gallery-07.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/gallery-08.jpg"><img src="photos/gallery-08.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/gallery-09.jpg"><img src="photos/gallery-09.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/gallery-10.jpg"><img src="photos/gallery-10.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/gallery-11.jpg"><img src="photos/gallery-11.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/gallery-12.jpg"><img src="photos/gallery-12.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-01.jpg"><img data-src="photos/gallery-01.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-02.jpg"><img data-src="photos/gallery-02.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-03.jpg"><img data-src="photos/gallery-03.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-04.jpg"><img data-src="photos/gallery-04.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-05.jpg"><img data-src="photos/gallery-05.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-06.jpg"><img data-src="photos/gallery-06.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-07.jpg"><img data-src="photos/gallery-07.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-08.jpg"><img data-src="photos/gallery-08.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-09.jpg"><img data-src="photos/gallery-09.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-10.jpg"><img data-src="photos/gallery-10.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-11.jpg"><img data-src="photos/gallery-11.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/gallery-12.jpg"><img data-src="photos/gallery-12.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
           </div>
         </div>
       </div>
@@ -226,18 +228,18 @@
           <h2 id="gallery-two-title">Prenup Photos</h2>
           <p class="section-desc" id="gallery-two-caption">From our prenup shoot</p>
           <div class="gallery-grid" id="gallery-two-grid">
-            <button type="button" class="gallery-item" data-src="photos/prenup-01.jpg"><img src="photos/prenup-01.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/prenup-02.jpg"><img src="photos/prenup-02.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/prenup-03.jpg"><img src="photos/prenup-03.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/prenup-04.jpg"><img src="photos/prenup-04.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/prenup-05.jpg"><img src="photos/prenup-05.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/prenup-06.jpg"><img src="photos/prenup-06.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/prenup-07.jpg"><img src="photos/prenup-07.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/prenup-08.jpg"><img src="photos/prenup-08.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/prenup-09.jpg"><img src="photos/prenup-09.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/prenup-10.jpg"><img src="photos/prenup-10.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/prenup-11.jpg"><img src="photos/prenup-11.jpg" alt="" loading="lazy" /></button>
-            <button type="button" class="gallery-item" data-src="photos/prenup-12.jpg"><img src="photos/prenup-12.jpg" alt="" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-01.jpg"><img data-src="photos/prenup-01.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-02.jpg"><img data-src="photos/prenup-02.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-03.jpg"><img data-src="photos/prenup-03.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-04.jpg"><img data-src="photos/prenup-04.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-05.jpg"><img data-src="photos/prenup-05.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-06.jpg"><img data-src="photos/prenup-06.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-07.jpg"><img data-src="photos/prenup-07.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-08.jpg"><img data-src="photos/prenup-08.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-09.jpg"><img data-src="photos/prenup-09.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-10.jpg"><img data-src="photos/prenup-10.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-11.jpg"><img data-src="photos/prenup-11.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
+            <button type="button" class="gallery-item" data-src="photos/prenup-12.jpg"><img data-src="photos/prenup-12.jpg" alt="" width="400" height="400" decoding="async" loading="lazy" /></button>
           </div>
         </div>
       </div>
@@ -310,10 +312,9 @@
   <div id="lightbox" class="lightbox" hidden>
     <button type="button" id="lightbox-close" class="lightbox-btn lightbox-close" aria-label="Close photo">&times;</button>
     <button type="button" id="lightbox-prev" class="lightbox-btn lightbox-nav lightbox-prev" aria-label="Previous photo">&lsaquo;</button>
-    <img id="lightbox-img" class="lightbox-img" src="" alt="" />
+    <img id="lightbox-img" class="lightbox-img" src="" alt="" decoding="async" />
     <button type="button" id="lightbox-next" class="lightbox-btn lightbox-nav lightbox-next" aria-label="Next photo">&rsaquo;</button>
   </div>
 
-  <script src="script.js"></script>
 </body>
 </html>

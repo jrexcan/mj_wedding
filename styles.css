@@ -88,6 +88,7 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  justify-content: safe center; /* long lists stay scrollable from the top */
   align-items: center;
   text-align: center;
   position: relative;
@@ -98,76 +99,26 @@ html, body {
 }
 
 /*
-  Each page uses a light overlay over a photo, so the photo is still
-  visible but navy text stays legible on top of it. To swap in your
-  own engagement photos later, replace just the url('...') on the
-  relevant rule — everything else can stay. Self-hosting the file
-  (see SETUP.md) is more reliable long-term than linking to someone
-  else's server, but these are kept here because that's what the
-  source file used.
+  Page backgrounds now live in photos.json and are applied by script.js
+  one page ahead of the reader, so a phone isn't pulling eleven full-size
+  photos before the cover has even settled. These rules keep only the
+  white wash each page had; the photo itself is layered in at runtime.
+  Edit the filenames in photos.json — not here.
 */
-.bg-cover {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.86)),
-    url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80');
+.bg-cover  { --page-wash: 0.86; }
+.bg-two    { --page-wash: 0.88; }
+.bg-three,
+.bg-four,
+.bg-five,
+.bg-six,
+.bg-seven,
+.bg-eight,
+.bg-nine   { --page-wash: 0.90; }
+
+[data-bg-key] {
   background-size: cover;
   background-position: center;
-}
-.bg-two {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)),
-    url('https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80');
-  background-size: cover;
-  background-position: center;
-}
-.bg-three {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-    url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80');
-  background-size: cover;
-  background-position: center;
-}
-.bg-four {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-    url('https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=80');
-  background-size: cover;
-  background-position: center;
-}
-.bg-five {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-    url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80');
-  background-size: cover;
-  background-position: center;
-}
-.bg-six {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-    url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80');
-  background-size: cover;
-  background-position: center;
-}
-.bg-seven {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-    url('https://images.unsplash.com/photo-1544078751-58fee2d8a03b?auto=format&fit=crop&w=1200&q=80');
-  background-size: cover;
-  background-position: center;
-}
-.bg-eight {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-    url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80');
-  background-size: cover;
-  background-position: center;
-}
-.bg-nine {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-    url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1200&q=80');
-  background-size: cover;
-  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* A faint ruled texture so flat white doesn't read as a dead background. */
@@ -297,18 +248,31 @@ html, body {
 
 .sub-detail { margin-bottom: 3px; color: var(--navy-accent); }
 
+/*
+  Two columns at every width, including phones. A grid rather than flex so
+  neither column can push the other out of the row, and minmax(0, 1fr) lets
+  a long name wrap inside its own column instead of forcing the grid wider.
+*/
 .two-column-list {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
   width: 100%;
-  gap: 10px;
-  font-size: clamp(0.66rem, 2.2vw, 0.74rem);
-  line-height: 1.6;
+  gap: 2px clamp(8px, 3.5vw, 18px);
+  font-size: clamp(0.6rem, 2.2vw, 0.74rem);
+  line-height: 1.55;
   margin-top: 4px;
   color: var(--navy-accent);
 }
 
-.column { flex: 1; }
+.column { min-width: 0; }
+
+.two-column-list p {
+  font-size: inherit;
+  line-height: inherit;
+  overflow-wrap: break-word;
+  margin-bottom: 1px;
+}
 
 .pairs-grid p { margin-bottom: 5px; color: var(--navy-accent); }
 
@@ -568,7 +532,7 @@ html, body {
   border-radius: 6px;
   border: 1px solid var(--border-navy);
   padding: 0;
-  background: none;
+  background: rgba(29, 53, 87, 0.07); /* holds the tile while the photo loads */
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
@@ -578,8 +542,11 @@ html, body {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.35s ease, filter 0.35s ease;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.35s ease, filter 0.35s ease;
 }
+
+.gallery-item img.is-loaded { opacity: 1; }
 
 .gallery-item::after {
   content: "";
@@ -679,13 +646,22 @@ html, body {
   .lightbox-btn { width: 36px; height: 36px; font-size: 1.2rem; }
 }
 
-
+@media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition-duration: 0.01ms !important; }
   .page-content > * { opacity: 1 !important; transform: none !important; }
-/* } */
+  .gallery-item img { opacity: 1 !important; }
+}
 
-@media screen and (max-width: 400px) {
-  .two-column-list { flex-direction: column; gap: 2px; }
+@media screen and (max-width: 430px) {
+  /* Principal sponsors stay side by side here — only the type shrinks. */
+  .two-column-list {
+    font-size: clamp(0.54rem, 2.7vw, 0.66rem);
+    gap: 1px clamp(6px, 2.5vw, 12px);
+  }
   .page-content { padding: 12px 14px; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media screen and (max-width: 330px) {
+  .two-column-list { font-size: 0.52rem; letter-spacing: -0.1px; }
 }
