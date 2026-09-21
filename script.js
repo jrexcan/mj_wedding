@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // .mp3, so whichever one is actually sitting in the folder gets used
   // instead of silently falling through to the synthesized swish.
   const fetchFlipSound = async () => {
-    for (const name of ['page-flip.wav', 'page-flip.mp3']) {
+    for (const name of ['page-flip.mp3']) {
       try {
         const res = await fetch(name);
         if (res.ok) return await res.arrayBuffer();

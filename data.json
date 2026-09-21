@@ -17,29 +17,29 @@
 
   "principalSponsors": {
     "men": [
-      "Mr. Rod Pagsolingan",
-      "Dr. Ricardo Valdez",
       "LTGEN John Bonafos AFP(RET)",
-      "Mr. Venier Vistro",
+      "Arch. Wilcon Ligaray",
+      "Dr. Ricardo Valdez",
       "Ptr. Jose Roque",
       "Ptr. Randy Mendoza",
       "Ptr. Ariel Gavarra",
       "Ptr. Ricardo David",
-      "Arch. Wilcon Ligaray",
+      "Mr. Rod Pagsolingan",
       "Mr. Oscar Vinuya",
+      "Mr. Venier Vistro",
       "Mr. Edwin Sibayan"
     ],
     "women": [
-      "Mrs. Cela Pagsolingan",
-      "Dr. Ingrid Valdez",
       "Dr. Ma. Luina Bonafos",
-      "Mrs. Emily Pine",
+      "Dr. Sheridan Manamtam",
+      "Dr. Ingrid Valdez",
       "Mrs. Nancy Roque",
       "Mrs. Faye Mendoza",
       "Mrs. Jasmin Camba",
       "Ptra. Jeanmiracle De Guzman",
-      "Dr. Sheridan Manamtam",
+      "Mrs. Cela Pagsolingan",
       "Mrs. Maretis Ratonel",
+      "Mrs. Emily Pine",
       "Mrs. Florencia Sibayan",
       "Mrs. Nancy Diaz",
       "Mrs. Perla Guiao"
@@ -80,7 +80,7 @@
     "name": "WestFarm Resort Hotel",
     "address": "",
     "mapUrl": "https://maps.google.com/maps?q=WestFarm+Resort+Hotel&ftid=0x3391459801473d6f:0x765c31a6cefb3343",
-    "mapImage": "photos/maps.jpg",
+    "mapImage": "photos/venue_building.png",
     "mapImageAlt": "Map showing the way to WestFarm Resort Hotel"
   },
 
