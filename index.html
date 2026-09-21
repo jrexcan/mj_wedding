@@ -178,6 +178,17 @@
           <div class="venue-info">
             <p class="venue-name" id="venue-name">WestFarm Resort Hotel</p>
             <p class="venue-address" id="venue-address" hidden></p>
+            <!-- Map photo. Stays hidden until venue.mapImage in data.json
+                 points at a real file, and hides itself again if that file
+                 is missing, so a broken image never shows. -->
+            <a class="venue-map-photo" id="venue-map-photo"
+               href="https://maps.google.com/maps?q=WestFarm+Resort+Hotel&ftid=0x3391459801473d6f:0x765c31a6cefb3343"
+               target="_blank" rel="noopener noreferrer" hidden>
+              <img id="venue-map-img" alt="Map showing the way to the venue"
+                   width="640" height="360" decoding="async" loading="lazy" />
+              <!-- <span class="venue-map-hint">Tap for directions</span> -->
+            </a>
+
             <a class="btn-primary" id="venue-map-link"
                href="https://maps.google.com/maps?q=WestFarm+Resort+Hotel&ftid=0x3391459801473d6f:0x765c31a6cefb3343"
                target="_blank" rel="noopener noreferrer">Open map</a>

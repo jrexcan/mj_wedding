@@ -79,7 +79,9 @@
   "venue": {
     "name": "WestFarm Resort Hotel",
     "address": "",
-    "mapUrl": "https://maps.google.com/maps?q=WestFarm+Resort+Hotel&ftid=0x3391459801473d6f:0x765c31a6cefb3343"
+    "mapUrl": "https://maps.google.com/maps?q=WestFarm+Resort+Hotel&ftid=0x3391459801473d6f:0x765c31a6cefb3343",
+    "mapImage": "photos/maps.jpg",
+    "mapImageAlt": "Map showing the way to WestFarm Resort Hotel"
   },
 
   "rsvpDeadline": "November 15, 2026"

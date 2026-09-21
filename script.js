@@ -150,6 +150,22 @@ function applyWeddingData(data) {
 
     const linkEl = document.getElementById('venue-map-link');
     if (linkEl && data.venue.mapUrl) linkEl.href = data.venue.mapUrl;
+
+    // Map photo, for display only (no link). data-src rather than src so it
+    // joins the same one-page-ahead loading as every other image instead of
+    // racing the cover.
+    const mapPhoto = document.getElementById('venue-map-photo');
+    const mapImg = document.getElementById('venue-map-img');
+    if (mapPhoto && mapImg) {
+      if (data.venue.mapImage) {
+        mapImg.dataset.src = data.venue.mapImage;
+        if (data.venue.mapImageAlt) mapImg.alt = data.venue.mapImageAlt;
+        mapImg.addEventListener('error', () => { mapPhoto.hidden = true; }, { once: true });
+        mapPhoto.hidden = false;
+      } else {
+        mapPhoto.hidden = true;
+      }
+    }
   }
 
   // RSVP deadline
