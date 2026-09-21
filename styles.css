@@ -302,13 +302,14 @@ html, body {
 }
 
 /*
-  Map photo — display only, no link, no hover state. A direct flex child
-  of .page-content (a column flex container with a definite height set by
-  page-flip), so `flex-basis: 50%` claims exactly half the page's height
-  regardless of how much text sits above or below it. flex-shrink/grow are
-  both 0 so nothing steals space from it; if the rest of the content can't
-  fit in the remaining half, .page-content's own overflow-y:auto scrolls
-  rather than squeezing the photo.
+  Map photo — display only, no link, no hover state, no framing. A direct
+  flex child of .page-content (a column flex container with a definite
+  height set by page-flip), so `flex-basis: 50%` claims exactly half the
+  page's height regardless of how much text sits above or below it.
+  flex-shrink/grow are both 0 so nothing steals space from it; if the rest
+  of the content can't fit in the remaining half, .page-content's own
+  overflow-y:auto scrolls rather than squeezing the photo. No border,
+  background, or shadow — the image sits flush against the page.
 */
 .venue-map-photo {
   display: block;
@@ -316,12 +317,9 @@ html, body {
   width: 100%;
   min-height: 0;
   margin: 6px 0 10px;
-  border: 1px solid var(--border-navy);
-  border-radius: 6px;
   overflow: hidden;
   line-height: 0;
-  background: rgba(29, 53, 87, 0.07); /* holds the space while it loads */
-  box-shadow: 0 4px 14px rgba(11, 29, 58, 0.14);
+  background: none;
 }
 
 .venue-map-photo[hidden] { display: none; }
