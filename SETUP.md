@@ -20,7 +20,7 @@ It's grouped in entourage order, matching the pages of the invitation:
 6. `bridalParty` — bridesmaid/groomsman pairs
 7. `littleAttendants` — `flowerGirls` (a plain list of names) and `bearers` (each with a `role` and a `name`, shown the same way as the secondary sponsors)
 8. `schedule` — the timeline of events
-9. `venue` — `name`, `address` (leave `""` to hide the address line), and `mapUrl` (the Google Maps link behind "Open map")
+9. `venue` — `name`, `address` (leave `""` to hide the address line), `mapUrl` (the Google Maps link behind "Open map" and behind the map photo), `mapImage` (a photo of the location or a screenshot of the map — see below), and `mapImageAlt` (what a screen reader says for it)
 10. `rsvpDeadline` — the date shown on the RSVP page
 
 Add or remove entries freely — e.g. a 6th principal sponsor pair, or a 5th bridesmaid/groomsman pair — the page renders however many you list. Keep the file valid JSON: every name in quotes, commas between entries, no trailing comma after the last one in a list. If you're not sure, paste the file into jsonlint.com before saving.
@@ -54,6 +54,21 @@ mkdir -p thumbs && mogrify -path thumbs -resize 600x600^ -quality 82 *.jpg
 Keep photos reasonably sized — under about 400 KB each — since guests will often be opening this on mobile data. Any image editor or a free tool like squoosh.app can shrink a photo without a visible quality loss.
 
 On the invitation itself: **tap or click any gallery photo to open it full-screen** (with the previous/next arrows or the arrow keys to browse, and Escape or tapping outside the photo to close). **Hovering a photo** on desktop darkens it slightly and shows a small expand icon, signaling it's clickable.
+
+---
+
+## 0c. The map photo
+
+The Schedule & venue page can show a picture of the location above the "Open map" button — a photo of the venue entrance, or a screenshot of the Google Maps pin, whichever reads more clearly to your guests.
+
+1. Save the image into the `photos/` folder as `map.jpg`.
+2. That's it — `data.json` already points at `"mapImage": "photos/map.jpg"`.
+
+To use a different filename, change `mapImage` in `data.json` to match. To turn the photo off entirely, set it to `""`.
+
+The photo is display only — it isn't a link, and tapping it does nothing; "Open map" below it is still the only way to the real map. It now takes up exactly half the page's height, so it reads as the focal point of the page rather than a small strip above the button. Until you add the file it stays hidden — it does not show a broken image — and if the file goes missing later it hides itself again.
+
+Because it fills half the page, an image close to that shape (wider than tall) will crop the least; a tall portrait photo will lose its left and right edges instead of its top and bottom. For a maps screenshot, zoom in far enough that street names stay readable at that size, and keep the file under about 200 KB.
 
 ---
 
@@ -132,6 +147,8 @@ Test it by opening the URL in a browser tab — you should see `{"result":"ok",.
 ---
 
 ## What changed in this round
+
+**Map photo on the Schedule & venue page, sized to half the page and display-only.** It sits above the venue name, takes up exactly half the page's height, and is not clickable — "Open map" is still the only way to the real map. The filename lives in `data.json` under `venue.mapImage` (see section 0c); drop a `map.jpg` into `photos/` and it appears.
 
 **Principal sponsors keep two columns on phones.** A rule in `styles.css` was stacking them into one long list below 400px wide. The list is now a CSS grid with two fixed columns at every width — only the type size scales down, and long names wrap inside their own column instead of pushing the layout sideways.
 

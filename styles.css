@@ -292,7 +292,7 @@ html, body {
 
 .event .time { font-weight: 600; color: var(--navy-dark); white-space: nowrap; }
 
-.venue-info { margin-top: clamp(8px, 1.6vh, 14px); width: 100%; max-width: 280px; }
+.venue-info { margin-top: clamp(8px, 1.6vh, 14px); width: 100%; max-width: min(100%, 340px); }
 
 .venue-name {
   font-family: var(--font-serif);
@@ -300,6 +300,42 @@ html, body {
   margin-bottom: 4px;
   color: var(--navy-dark);
 }
+
+/*
+  Map photo — display only, no link, no hover state. A direct flex child
+  of .page-content (a column flex container with a definite height set by
+  page-flip), so `flex-basis: 50%` claims exactly half the page's height
+  regardless of how much text sits above or below it. flex-shrink/grow are
+  both 0 so nothing steals space from it; if the rest of the content can't
+  fit in the remaining half, .page-content's own overflow-y:auto scrolls
+  rather than squeezing the photo.
+*/
+.venue-map-photo {
+  display: block;
+  flex: 0 0 50%;
+  width: 100%;
+  min-height: 0;
+  margin: 6px 0 10px;
+  border: 1px solid var(--border-navy);
+  border-radius: 6px;
+  overflow: hidden;
+  line-height: 0;
+  background: rgba(29, 53, 87, 0.07); /* holds the space while it loads */
+  box-shadow: 0 4px 14px rgba(11, 29, 58, 0.14);
+}
+
+.venue-map-photo[hidden] { display: none; }
+
+.venue-map-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.venue-map-photo img.is-loaded { opacity: 1; }
 
 .venue-address {
   font-size: clamp(0.66rem, 2.2vw, 0.74rem);
@@ -649,7 +685,8 @@ html, body {
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition-duration: 0.01ms !important; }
   .page-content > * { opacity: 1 !important; transform: none !important; }
-  .gallery-item img { opacity: 1 !important; }
+  .gallery-item img,
+  .venue-map-photo img { opacity: 1 !important; }
 }
 
 @media screen and (max-width: 430px) {
