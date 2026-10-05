@@ -1,0 +1,251 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .grid-line { stroke: #1d3557; stroke-width: 2; opacity: 0.25; }
+      .outer-border { stroke: #0b1d3a; stroke-width: 6; fill: none; }
+      .card-bg { fill: #ffffff; stroke: #1d3557; stroke-width: 1.5; }
+      .header-card { fill: #f7f9fb; stroke: #0b1d3a; stroke-width: 2; }
+      .title-main { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 28px; font-weight: bold; fill: #0b1d3a; text-anchor: middle; }
+      .title-sub { font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 2px; fill: #1d3557; text-anchor: middle; font-weight: 600; }
+      .card-badge { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: bold; letter-spacing: 1px; fill: #ffffff; }
+      .card-desc { font-family: 'Montserrat', sans-serif; font-size: 10px; fill: #1d3557; text-anchor: middle; }
+      .badge-bg { fill: #0b1d3a; rx: 4px; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="900" class="bg"/>
+
+  <!-- Subtle background texture grid -->
+  <g class="grid-line">
+    <line x1="0" y1="100" x2="900" y2="100"/>
+    <line x1="0" y1="200" x2="900" y2="200"/>
+    <line x1="0" y1="300" x2="900" y2="300"/>
+    <line x1="0" y1="400" x2="900" y2="400"/>
+    <line x1="0" y1="500" x2="900" y2="500"/>
+    <line x1="0" y1="600" x2="900" y2="600"/>
+    <line x1="0" y1="700" x2="900" y2="700"/>
+    <line x1="0" y1="800" x2="900" y2="800"/>
+    <line x1="100" y1="0" x2="100" y2="900"/>
+    <line x1="200" y1="0" x2="200" y2="900"/>
+    <line x1="300" y1="0" x2="300" y2="900"/>
+    <line x1="400" y1="0" x2="400" y2="900"/>
+    <line x1="500" y1="0" x2="500" y2="900"/>
+    <line x1="600" y1="0" x2="600" y2="900"/>
+    <line x1="700" y1="0" x2="700" y2="900"/>
+    <line x1="800" y1="0" x2="800" y2="900"/>
+  </g>
+
+  <!-- 3x3 Grid Cards -->
+  
+  <!-- 1. Top-Left: Couple Header Card -->
+  <g transform="translate(40, 40)">
+    <rect width="250" height="250" class="header-card" rx="8"/>
+    <text x="125" y="90" class="title-main">MARY GRACE</text>
+    <text x="125" y="120" class="title-main" font-style="italic" font-size="22">&amp; J-REX HERO</text>
+    <line x1="85" y1="140" x2="165" y2="140" stroke="#457b9d" stroke-width="1"/>
+    <text x="125" y="165" class="title-sub">DECEMBER 18, 2026</text>
+    <text x="125" y="185" class="card-desc">WEDDING ATTIRE GUIDE</text>
+  </g>
+
+  <!-- 2. Top-Middle: The Bride & Groom -->
+  <g transform="translate(325, 40)">
+    <rect width="250" height="250" class="card-bg" rx="8"/>
+    <g transform="translate(25, 10) scale(1.0)">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="100%" height="100%">
+  <!-- Bride Veil -->
+  <path d="M70,45 Q65,110 50,180 Q100,195 120,180 Q105,110 100,45 Z" fill="#ffffff" opacity="0.6" stroke="#457b9d" stroke-width="0.8" stroke-dasharray="2,2"/>
+  
+  <!-- Bride Figure -->
+  <circle cx="85" cy="40" r="12" fill="#5c3a21"/> <!-- Hair back -->
+  <circle cx="85" cy="42" r="10" fill="#e0ac69"/> <!-- Head -->
+  <path d="M77,36 Q85,30 93,36 Q85,42 77,36" fill="#5c3a21"/> <!-- Hair front -->
+  <!-- Wedding Dress -->
+  <path d="M77,58 L93,58 L97,85 L103,180 L67,180 L73,85 Z" fill="#ffffff" stroke="#1d3557" stroke-width="1.2"/>
+  <path d="M77,58 Q85,70 93,58 L91,85 L79,85 Z" fill="#f0f4f8"/>
+  <path d="M68,180 Q85,190 102,180" stroke="#1d3557" stroke-width="1" fill="none"/>
+
+  <!-- Groom Figure -->
+  <circle cx="125" cy="38" r="10" fill="#2c1a0e"/> <!-- Hair -->
+  <circle cx="125" cy="42" r="10" fill="#d08b5b"/> <!-- Head -->
+  <!-- Barong Tagalog -->
+  <path d="M112,56 L138,56 L142,110 L108,110 Z" fill="#fafafa" stroke="#1d3557" stroke-width="1.2"/>
+  <!-- Barong embroidery lines -->
+  <rect x="120" y="62" width="10" height="38" fill="none" stroke="#a8dadc" stroke-width="1" stroke-dasharray="2,1"/>
+  <line x1="125" y1="56" x2="125" y2="108" stroke="#1d3557" stroke-width="0.8"/>
+  <!-- Pants -->
+  <path d="M113,110 L124,110 L123,180 L113,180 Z" fill="#0b1d3a"/>
+  <path d="M126,110 L137,110 L137,180 L127,180 Z" fill="#0b1d3a"/>
+</svg>
+    </g>
+    <rect x="20" y="205" width="210" height="28" class="badge-bg"/>
+    <text x="125" y="223" class="card-badge" text-anchor="middle">THE BRIDE &amp; GROOM</text>
+  </g>
+
+  <!-- 3. Top-Right: Bridesmaids & Secondary Ladies -->
+  <g transform="translate(610, 40)">
+    <rect width="250" height="250" class="card-bg" rx="8"/>
+    <g transform="translate(25, 10) scale(1.0)">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="100%" height="100%">
+  <!-- Bridesmaid 1 -->
+  <circle cx="68" cy="40" r="12" fill="#8d5b4c"/>
+  <circle cx="68" cy="42" r="10" fill="#f1c27d"/>
+  <path d="M60,35 Q68,28 76,35" fill="#8d5b4c"/>
+  <!-- Navy Dress 1 -->
+  <path d="M60,58 L76,58 L82,90 L88,170 L48,170 L54,90 Z" fill="#1d3557" stroke="#0b1d3a" stroke-width="1.2"/>
+  <path d="M60,58 Q68,72 76,58" fill="#0b1d3a"/>
+
+  <!-- Bridesmaid 2 -->
+  <circle cx="132" cy="38" r="11" fill="#2c1a0e"/>
+  <circle cx="132" cy="42" r="10" fill="#c68642"/>
+  <path d="M124,34 Q132,26 140,34 Q132,44 124,34" fill="#2c1a0e"/>
+  <!-- Navy Dress 2 (Asymmetrical) -->
+  <path d="M122,58 L142,64 L138,95 L145,165 L119,165 L126,95 Z" fill="#0b1d3a" stroke="#1d3557" stroke-width="1.2"/>
+  <path d="M122,58 L142,64 L132,80 Z" fill="#457b9d"/>
+</svg>
+    </g>
+    <rect x="15" y="200" width="220" height="36" class="badge-bg"/>
+    <text x="125" y="215" class="card-badge" text-anchor="middle">BRIDESMAIDS &amp; SECONDARY</text>
+    <text x="125" y="228" class="card-badge" font-size="9px" opacity="0.85" text-anchor="middle">(Navy Blue Dresses)</text>
+  </g>
+
+  <!-- 4. Middle-Left: Ninangs & Principal Sponsors -->
+  <g transform="translate(40, 325)">
+    <rect width="250" height="250" class="card-bg" rx="8"/>
+    <g transform="translate(25, 10) scale(1.0)">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="100%" height="100%">
+  <!-- Ninang 1 (Classic Gown) -->
+  <circle cx="65" cy="42" r="11" fill="#3a2010"/>
+  <circle cx="65" cy="44" r="10" fill="#e0ac69"/>
+  <!-- Filipiniana Sleeves & Navy Dress -->
+  <path d="M50,58 Q55,50 62,56 L68,56 Q75,50 80,58 L76,92 L82,175 L48,175 L54,92 Z" fill="#0b1d3a" stroke="#1d3557" stroke-width="1.2"/>
+  <path d="M50,58 Q45,68 56,72 Z" fill="#1d3557"/> <!-- Sleeve L -->
+  <path d="M80,58 Q85,68 74,72 Z" fill="#1d3557"/> <!-- Sleeve R -->
+
+  <!-- Ninang 2 (Off-shoulder Navy Gown) -->
+  <circle cx="135" cy="40" r="11" fill="#22150c"/>
+  <circle cx="135" cy="44" r="10" fill="#d08b5b"/>
+  <path d="M120,60 Q135,52 150,60 L144,95 L152,175 L118,175 L126,95 Z" fill="#1d3557" stroke="#0b1d3a" stroke-width="1.2"/>
+  <path d="M120,60 Q135,70 150,60 Q135,64 120,60" fill="#457b9d"/>
+</svg>
+    </g>
+    <rect x="15" y="200" width="220" height="36" class="badge-bg"/>
+    <text x="125" y="215" class="card-badge" text-anchor="middle">NINANGS &amp; SPONSORS</text>
+    <text x="125" y="228" class="card-badge" font-size="9px" opacity="0.85" text-anchor="middle">(Navy Blue Formal)</text>
+  </g>
+
+  <!-- 5. Center Block: Decoding the Attire Roles -->
+  <g transform="translate(325, 325)">
+    <rect width="250" height="250" class="header-card" rx="8"/>
+    <circle cx="125" cy="125" r="95" fill="none" stroke="#1d3557" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="125" y="105" class="title-main" font-size="24">DECODING THE</text>
+    <text x="125" y="133" class="title-main" font-size="24">WEDDING</text>
+    <text x="125" y="161" class="title-main" font-size="24">ATTIRE ROLES</text>
+  </g>
+
+  <!-- 6. Middle-Right: Gentlemen -->
+  <g transform="translate(610, 325)">
+    <rect width="250" height="250" class="card-bg" rx="8"/>
+    <g transform="translate(25, 10) scale(1.0)">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="100%" height="100%">
+  <!-- Gentleman 1 -->
+  <circle cx="50" cy="42" r="9" fill="#2b1704"/>
+  <circle cx="50" cy="45" r="9" fill="#8d5524"/>
+  <path d="M39,58 L61,58 L64,115 L36,115 Z" fill="#f8f9fa" stroke="#1d3557" stroke-width="1.2"/>
+  <rect x="46" y="64" width="8" height="40" fill="none" stroke="#a8dadc" stroke-width="0.8"/>
+  <path d="M40,115 L50,115 L49,180 L40,180 Z" fill="#0b1d3a"/>
+  <path d="M51,115 L61,115 L60,180 L51,180 Z" fill="#0b1d3a"/>
+
+  <!-- Gentleman 2 (Center) -->
+  <circle cx="100" cy="38" r="10" fill="#1c1003"/>
+  <circle cx="100" cy="42" r="10" fill="#c68642"/>
+  <path d="M87,56 L113,56 L117,115 L83,115 Z" fill="#ffffff" stroke="#1d3557" stroke-width="1.2"/>
+  <rect x="95" y="62" width="10" height="42" fill="none" stroke="#457b9d" stroke-width="1" stroke-dasharray="2,1"/>
+  <path d="M88,115 L99,115 L98,185 L88,185 Z" fill="#0b1d3a"/>
+  <path d="M101,115 L112,115 L112,185 L101,185 Z" fill="#0b1d3a"/>
+
+  <!-- Gentleman 3 -->
+  <circle cx="150" cy="42" r="9" fill="#3d2314"/>
+  <circle cx="150" cy="45" r="9" fill="#e0ac69"/>
+  <path d="M139,58 L161,58 L164,115 L136,115 Z" fill="#f8f9fa" stroke="#1d3557" stroke-width="1.2"/>
+  <rect x="146" y="64" width="8" height="40" fill="none" stroke="#a8dadc" stroke-width="0.8"/>
+  <path d="M140,115 L150,115 L149,180 L140,180 Z" fill="#0b1d3a"/>
+  <path d="M151,115 L161,115 L160,180 L151,180 Z" fill="#0b1d3a"/>
+</svg>
+    </g>
+    <rect x="15" y="200" width="220" height="36" class="badge-bg"/>
+    <text x="125" y="215" class="card-badge" text-anchor="middle">GENTLEMEN</text>
+    <text x="125" y="228" class="card-badge" font-size="9px" opacity="0.85" text-anchor="middle">(Barong Tagalog for ALL Men)</text>
+  </g>
+
+  <!-- 7. Bottom-Left: Female Guests -->
+  <g transform="translate(40, 610)">
+    <rect width="250" height="250" class="card-bg" rx="8"/>
+    <g transform="translate(25, 10) scale(1.0)">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="100%" height="100%">
+  <!-- Female Guest 1 (Printed Blue Dress) -->
+  <circle cx="65" cy="40" r="11" fill="#4a2e1b"/>
+  <circle cx="65" cy="43" r="10" fill="#f1c27d"/>
+  <path d="M52,58 L78,58 L82,100 L88,170 L42,170 L48,100 Z" fill="#ffffff" stroke="#1d3557" stroke-width="1.2"/>
+  <!-- Blue pattern accents -->
+  <path d="M56,70 L62,76 L56,82 L50,76 Z" fill="#1d3557"/>
+  <path d="M74,70 L80,76 L74,82 L68,76 Z" fill="#1d3557"/>
+  <path d="M65,110 L72,118 L65,126 L58,118 Z" fill="#457b9d"/>
+  <path d="M50,135 L56,142 L50,150 L44,142 Z" fill="#1d3557"/>
+  <path d="M80,135 L86,142 L80,150 L74,142 Z" fill="#1d3557"/>
+
+  <!-- Female Guest 2 (Navy Skirt + Light Top) -->
+  <circle cx="135" cy="38" r="11" fill="#261408"/>
+  <circle cx="135" cy="42" r="10" fill="#d08b5b"/>
+  <!-- Top -->
+  <path d="M123,56 L147,56 L145,90 L125,90 Z" fill="#f7f9fb" stroke="#1d3557" stroke-width="1"/>
+  <!-- Navy Skirt -->
+  <path d="M124,90 L146,90 L156,170 L114,170 Z" fill="#0b1d3a" stroke="#1d3557" stroke-width="1.2"/>
+</svg>
+    </g>
+    <rect x="15" y="200" width="220" height="36" class="badge-bg"/>
+    <text x="125" y="215" class="card-badge" text-anchor="middle">FEMALE GUESTS</text>
+    <text x="125" y="228" class="card-badge" font-size="9px" opacity="0.85" text-anchor="middle">(Touch of Navy / Blue)</text>
+  </g>
+
+  <!-- 8. Bottom-Middle: Guest Couple -->
+  <g transform="translate(325, 610)">
+    <rect width="250" height="250" class="card-bg" rx="8"/>
+    <g transform="translate(25, 10) scale(1.0)">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="100%" height="100%">
+  <!-- Male Guest -->
+  <circle cx="70" cy="38" r="10" fill="#1f1105"/>
+  <circle cx="70" cy="42" r="10" fill="#e0ac69"/>
+  <path d="M57,56 L83,56 L86,112 L54,112 Z" fill="#ffffff" stroke="#1d3557" stroke-width="1.2"/>
+  <line x1="70" y1="56" x2="70" y2="112" stroke="#457b9d" stroke-width="1"/>
+  <path d="M58,112 L68,112 L67,180 L58,180 Z" fill="#0b1d3a"/>
+  <path d="M71,112 L81,112 L81,180 L71,180 Z" fill="#0b1d3a"/>
+
+  <!-- Female Guest with Navy Blazer/Touch of Blue -->
+  <circle cx="130" cy="40" r="11" fill="#3b2219"/>
+  <circle cx="130" cy="44" r="10" fill="#c68642"/>
+  <!-- Dress inner -->
+  <path d="M120,60 L140,60 L142,170 L118,170 Z" fill="#ffffff" stroke="#1d3557" stroke-width="0.8"/>
+  <!-- Navy Blazer -->
+  <path d="M115,58 L126,58 L128,125 L113,120 Z" fill="#1d3557"/>
+  <path d="M145,58 L134,58 L132,125 L147,120 Z" fill="#1d3557"/>
+</svg>
+    </g>
+    <rect x="20" y="205" width="210" height="28" class="badge-bg"/>
+    <text x="125" y="223" class="card-badge" text-anchor="middle">GUEST COUPLE</text>
+  </g>
+
+  <!-- 9. Bottom-Right: Monogram / Date Seal -->
+  <g transform="translate(610, 610)">
+    <rect width="250" height="250" class="header-card" rx="8"/>
+    <circle cx="125" cy="125" r="70" fill="none" stroke="#0b1d3a" stroke-width="1.5"/>
+    <circle cx="125" cy="125" r="64" fill="none" stroke="#457b9d" stroke-width="0.8" stroke-dasharray="3,2"/>
+    <text x="125" y="118" class="title-main" font-size="32">M &amp; J</text>
+    <line x1="90" y1="130" x2="160" y2="130" stroke="#0b1d3a" stroke-width="1"/>
+    <text x="125" y="148" class="title-sub" font-size="10px">12 . 18 . 2026</text>
+  </g>
+
+  <!-- Outer Frame -->
+  <rect x="20" y="20" width="860" height="860" class="outer-border" rx="12"/>
+</svg>

@@ -18,7 +18,7 @@
   "principalSponsors": {
     "men": [
       "LTGEN John Bonafos AFP(RET)",
-      "Arch. Wilcon Ligaray",
+      "Arch. Wilson Ligaray",
       "Dr. Ricardo Valdez",
       "Ptr. Jose Roque",
       "Ptr. Randy Mendoza",
@@ -43,13 +43,12 @@
       "Mrs. Florencia Sibayan",
       "Mrs. Nancy Diaz",
       "Mrs. Perla Guiao"
-
     ]
   },
 
   "secondarySponsors": [
-    { "role": "Candle", "sponsor1": "Candle Sponsor One", "sponsor2": "Candle Sponsor Two" },
-    { "role": "Veil", "sponsor1": "Veil Sponsor One", "sponsor2": "Veil Sponsor Two" },
+    { "role": "Candle", "sponsor1": "Jonieronne Tamondong", "sponsor2": "Donna Vhie Tamondong" },
+    { "role": "Veil", "sponsor1": "Alex Perez", "sponsor2": "Gliza Veron Perez" },
     { "role": "Cord", "sponsor1": "Cord Sponsor One", "sponsor2": "Cord Sponsor Two" }
   ],
 
