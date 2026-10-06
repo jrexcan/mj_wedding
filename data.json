@@ -7,12 +7,12 @@
 
   "parents": {
     "groom": ["Mr. Esmeraldo C. Canilang", "Mrs. Elvira D. Canilang"],
-    "bride": ["Mr. Gil Camacho", "Mrs. Espedita S. Camacho"]
+    "bride": ["Mr. Mark Gil S. Camacho", "Mrs. Espedita S. Camacho"]
   },
 
   "honorAttendants": {
-    "maidOfHonor": "Amazing Grace",
-    "bestMan": "Best Man Name"
+    "maidOfHonor": "Amazing Grace Galay",
+    "bestMan": "Best man"
   },
 
   "principalSponsors": {
@@ -49,22 +49,22 @@
   "secondarySponsors": [
     { "role": "Candle", "sponsor1": "Jonieronne Tamondong", "sponsor2": "Donna Vhie Tamondong" },
     { "role": "Veil", "sponsor1": "Alex Perez", "sponsor2": "Gliza Veron Perez" },
-    { "role": "Cord", "sponsor1": "Cord Sponsor One", "sponsor2": "Cord Sponsor Two" }
+    { "role": "Cord", "sponsor1": "Brando Castro", "sponsor2": "Erisa Sanchez" }
   ],
 
   "bridalParty": [
-    { "bridesmaid": "Bridesmaid 1", "groomsman": "Groomsman 1" },
-    { "bridesmaid": "Bridesmaid 2", "groomsman": "Groomsman 2" },
-    { "bridesmaid": "Bridesmaid 3", "groomsman": "Groomsman 3" },
-    { "bridesmaid": "Bridesmaid 4", "groomsman": "Groomsman 4" }
+    { "bridesmaid": "Jackie Lou Gamboa", "groomsman": "Mark James Camacho" },
+    { "bridesmaid": "Dulce Duran", "groomsman": "Rojie Lloyd Duran" },
+    { "bridesmaid": "Jaaziel Resquid", "groomsman": "Mark Jay Duran" },
+    { "bridesmaid": "Janilla Kumar", "groomsman": "Laurence Canilang" }
   ],
 
   "littleAttendants": {
-    "flowerGirls": ["Flower Girl 1", "Flower Girl 2", "Flower Girl 3", "Flower Girl 4"],
+    "flowerGirls": ["Jannea Rhian Tamondong", "Summer Elery Canilang", "Brielle Tobes", "Flower Girl 4"],
     "bearers": [
-      { "role": "Ring Bearer", "name": "Ring Bearer Name" },
-      { "role": "Coin Bearer", "name": "Coin Bearer Name" },
-      { "role": "Bible Bearer", "name": "Bible Bearer Name" },
+      { "role": "Ring Bearer", "name": "Simon Perez" },
+      { "role": "Coin Bearer", "name": "Ryden Lacson" },
+      { "role": "Bible Bearer", "name": "Enteng Camacho" },
       { "role": "Banner Bearer", "name": "Banner Bearer Name" }
     ]
   },
@@ -83,5 +83,5 @@
     "mapImageAlt": "Map showing the way to WestFarm Resort Hotel"
   },
 
-  "rsvpDeadline": "November 15, 2026"
+  "rsvpDeadline": "November 25, 2026"
 }
