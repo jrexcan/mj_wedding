@@ -248,11 +248,28 @@ function applyGalleryData(gallery) {
   }
 }
 
+function renderDressCode(dressCode) {
+  const grid = document.getElementById('dress-code-grid');
+  if (!grid || !dressCode || !Array.isArray(dressCode.cards) || !dressCode.cards.length) return;
+
+  grid.innerHTML = dressCode.cards.map((c) => `
+    <div class="vector-card">
+      <div class="vector-art-wrapper">
+        <img data-src="${escapeHtml(c.src)}" alt="${escapeHtml(c.alt || c.label || '')}"
+             decoding="async" loading="lazy" />
+      </div>
+      <div class="vector-card-label">${escapeHtml(c.label)}</div>
+      <p class="card-desc">${escapeHtml(c.description)}</p>
+    </div>
+  `).join('');
+}
+
 function applyPhotosData(photos) {
   if (!photos) return;
   thumbConfig = photos.thumbnails || null;
   setBackgroundSources(photos.pageBackgrounds);
   applyGalleryData(photos.gallery);
+  renderDressCode(photos.dressCode);
 }
 
 document.addEventListener('DOMContentLoaded', async () => {

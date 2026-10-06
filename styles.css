@@ -293,10 +293,18 @@ html, body {
   justify-content: center;
 }
 
-.vector-art-wrapper svg {
+.vector-art-wrapper img {
   max-width: 100%;
   max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
+
+.vector-art-wrapper img.is-loaded { opacity: 1; }
 
 .vector-card-label {
   background: var(--navy-dark);
