@@ -481,6 +481,33 @@ html, body {
 
 .rsvp-done p { font-size: clamp(0.72rem, 2.4vw, 0.8rem); line-height: 1.6; color: var(--navy-accent); }
 
+/* ---------- Gift Note ---------- */
+.rsvp-page { padding-bottom: clamp(16px, 3vh, 26px); }
+
+.gift-note {
+  width: 100%;
+  max-width: 330px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.gift-note-title {
+  font-family: var(--font-serif);
+  font-size: clamp(0.82rem, 2.7vw, 0.96rem);
+  letter-spacing: 2px;
+  color: var(--navy-accent);
+  margin-bottom: 6px;
+}
+
+.gift-note-text {
+  font-size: clamp(0.56rem, 1.9vw, 0.66rem);
+  letter-spacing: 0.8px;
+  line-height: 1.7;
+  color: var(--navy-dark);
+}
+
+.gift-note-text + .gift-note-text { margin-top: 6px; }
+
 /* ---------- Controls ---------- */
 .flipbook-controls {
   height: var(--control-height);
