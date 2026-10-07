@@ -17,14 +17,8 @@
     "rsvp": "photos/p18.jpg"
   },
   "dressCode": {
-    "cards": [
-      { "src": "photos/bride.png",       "alt": "The bride in a white wedding gown with veil and bouquet", "label": "THE BRIDE",                 "description": "White Gown" },
-      { "src": "photos/groom.png",       "alt": "The groom in a navy suit with a bow tie",                 "label": "THE GROOM",                 "description": "Navy Suit & Bow Tie" },
-      { "src": "photos/bridesmaids.png", "alt": "Bridesmaids in navy blue dresses",                        "label": "BRIDESMAIDS & SECONDARY",   "description": "Navy Blue Dresses" },
-      { "src": "photos/ladies.png",     "alt": "Ninangs in navy blue",       "label": "NINANGS",        "description": "Navy Blue Formal" },
-      { "src": "photos/gentlemens.png",   "alt": "A man wearing a Barong Tagalog",                          "label": "NINONGS/GENTLEMEN",                 "description": "Barong Tagalog" },
-      { "src": "photos/guest.png",      "alt": "Guests in semi-formal attire with touches of blue",       "label": "GUESTS",                    "description": "Semi-Formal with a Touch of Blue" }
-    ]
+    "image": "photos/dress_code_edited.jpg",
+    "alt": "Wedding dress code guide"
   },
   "gallery": {
     "pageOne": {

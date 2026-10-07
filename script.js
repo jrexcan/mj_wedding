@@ -249,19 +249,14 @@ function applyGalleryData(gallery) {
 }
 
 function renderDressCode(dressCode) {
-  const grid = document.getElementById('dress-code-grid');
-  if (!grid || !dressCode || !Array.isArray(dressCode.cards) || !dressCode.cards.length) return;
+  const figure = document.getElementById('dress-code-figure');
+  const img = document.getElementById('dress-code-img');
+  if (!figure || !img || !dressCode || !dressCode.image) return;
 
-  grid.innerHTML = dressCode.cards.map((c) => `
-    <div class="vector-card">
-      <div class="vector-art-wrapper">
-        <img data-src="${escapeHtml(c.src)}" alt="${escapeHtml(c.alt || c.label || '')}"
-             decoding="async" loading="lazy" />
-      </div>
-      <div class="vector-card-label">${escapeHtml(c.label)}</div>
-      <p class="card-desc">${escapeHtml(c.description)}</p>
-    </div>
-  `).join('');
+  img.dataset.src = dressCode.image;
+  if (dressCode.alt) img.alt = dressCode.alt;
+  img.addEventListener('error', () => { figure.hidden = true; }, { once: true });
+  figure.hidden = false;
 }
 
 function applyPhotosData(photos) {

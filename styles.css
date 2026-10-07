@@ -263,85 +263,39 @@ html, body {
 
 .pairs-grid p { margin-bottom: 5px; color: var(--navy-accent); }
 
-/* ---------- Vector Dress Code Grid Layout ---------- */
-.vector-attire-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(6px, 1.4vw, 10px);
+/* ---------- Dress Code Photo ---------- */
+.dress-code-figure {
+  flex: 1 1 auto;
+  min-height: 0;
   width: 100%;
   max-width: 420px;
-  margin: clamp(6px, 1.2vh, 12px) auto 4px;
-}
-
-.vector-card {
-  background: var(--pure-white);
-  border: 1px solid var(--border-navy);
-  border-radius: 6px;
-  padding: 6px 4px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 2px 6px rgba(11, 29, 58, 0.05);
-}
-
-.vector-art-wrapper {
-  width: 100%;
-  height: clamp(80px, 15vh, 110px);
+  margin: clamp(4px, 1vh, 10px) auto 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.vector-art-wrapper img {
+.dress-code-figure[hidden] { display: none; }
+
+.dress-code-figure img {
+  display: block;
   max-width: 100%;
   max-height: 100%;
   width: auto;
   height: auto;
   object-fit: contain;
-  display: block;
+  /* white areas of the photo melt into the page background */
+  mix-blend-mode: multiply;
+  /* soft feathered edges so no hard rectangle shows */
+  /* -webkit-mask-image: radial-gradient(ellipse closest-side at center, #000 72%, transparent 100%); */
+  /* mask-image: radial-gradient(ellipse closest-side at center, #000 72%, transparent 100%); */
   opacity: 0;
   transition: opacity 0.4s ease;
 }
 
-.vector-art-wrapper img.is-loaded { opacity: 1; }
-
-.vector-card-label {
-  background: var(--navy-dark);
-  color: var(--pure-white);
-  font-size: clamp(0.5rem, 1.6vw, 0.6rem);
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  padding: 3px 4px;
-  border-radius: 3px;
-  width: 100%;
-  text-align: center;
-  margin-top: 4px;
-  line-height: 1.1;
-}
-
-.vector-card .card-desc {
-  font-size: clamp(0.5rem, 1.5vw, 0.58rem);
-  color: var(--navy-light);
-  line-height: 1.2;
-  margin-top: 3px;
-  text-align: center;
-}
-
-/* ---------- Swatches ---------- */
-.color-swatches {
-  display: flex;
-  gap: 8px;
-  margin-top: clamp(6px, 1.2vh, 10px);
-  justify-content: center;
-}
-
-.swatch {
-  width: clamp(20px, 4.5vw, 24px);
-  height: clamp(20px, 4.5vw, 24px);
-  border-radius: 50%;
-  box-shadow: 0 2px 5px rgba(11, 29, 58, 0.25);
-}
+/* Reduced opacity lets the page background show through the photo's white,
+   so it blends in. Lower the number for more blend, raise it for a crisper image. */
+.dress-code-figure img.is-loaded { opacity: 0.9; }
 
 /* ---------- Schedule ---------- */
 .timeline { margin: clamp(6px, 1.2vh, 12px) 0; width: 100%; max-width: 320px; }
@@ -716,8 +670,6 @@ html, body {
 .lightbox-next { right: 12px; }
 
 @media screen and (max-width: 430px) {
-  .vector-attire-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
-  .vector-art-wrapper { height: 75px; }
   .two-column-list { font-size: clamp(0.54rem, 2.7vw, 0.66rem); gap: 1px clamp(6px, 2.5vw, 12px); }
   .page-content { padding: 10px 12px; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
