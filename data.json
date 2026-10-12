@@ -12,7 +12,7 @@
 
   "honorAttendants": {
     "maidOfHonor": "Amazing Grace Galay",
-    "bestMan": "Best man"
+    "bestMan": "Job "
   },
 
   "principalSponsors": {
@@ -25,7 +25,7 @@
       "Ptr. Ariel Gavarra",
       "Ptr. Ricardo David",
       "Mr. Rod Pagsolingan",
-      "Mr. Oscar Vinuya",
+      "Mr. Oscar Vinoya",
       "Mr. Venier Vistro",
       "Mr. Edwin Sibayan"
     ],
@@ -41,7 +41,6 @@
       "Mrs. Maretis Ratonel",
       "Mrs. Emily Pine",
       "Mrs. Florencia Sibayan",
-      "Mrs. Nancy Diaz",
       "Mrs. Perla Guiao"
     ]
   },
@@ -49,23 +48,22 @@
   "secondarySponsors": [
     { "role": "Candle", "sponsor1": "Jonieronne Tamondong", "sponsor2": "Donna Vhie Tamondong" },
     { "role": "Veil", "sponsor1": "Alex Perez", "sponsor2": "Gliza Veron Perez" },
-    { "role": "Cord", "sponsor1": "Brando Castro", "sponsor2": "Erisa Sanchez" }
+    { "role": "Cord", "sponsor1": "Genesis Tamondong", "sponsor2": "Erisa Sanchez" }
   ],
 
   "bridalParty": [
     { "bridesmaid": "Jackie Lou Gamboa", "groomsman": "Mark James Camacho" },
     { "bridesmaid": "Dulce Duran", "groomsman": "Rojie Lloyd Duran" },
-    { "bridesmaid": "Jaaziel Resquid", "groomsman": "Mark Jay Duran" },
+    { "bridesmaid": "Jaaziel Resquid", "groomsman": "Kirby Duran" },
     { "bridesmaid": "Janilla Kumar", "groomsman": "Laurence Canilang" }
   ],
 
   "littleAttendants": {
-    "flowerGirls": ["Jannea Rhian Tamondong", "Summer Elery Canilang", "Brielle Tobes", "Flower Girl 4"],
+    "flowerGirls": ["Jannea Rhian Tamondong", "Summer Elery Canilang", "Brielle Tobes"],
     "bearers": [
-      { "role": "Ring Bearer", "name": "Simon Perez" },
+      { "role": "Ring Bearer", "name": "Aele Simon Perez" },
       { "role": "Coin Bearer", "name": "Ryden Lacson" },
-      { "role": "Bible Bearer", "name": "Enteng Camacho" },
-      { "role": "Banner Bearer", "name": "Banner Bearer Name" }
+      { "role": "Bible Bearer", "name": "Zach Zyaire Camacho" }
     ]
   },
 
