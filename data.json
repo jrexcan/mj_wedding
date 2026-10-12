@@ -25,7 +25,7 @@
       "Ptr. Ariel Gavarra",
       "Ptr. Ricardo David",
       "Mr. Rod Pagsolingan",
-      "Mr. Oscar Vinuya",
+      "Mr. Oscar Vinoya",
       "Mr. Venier Vistro",
       "Mr. Edwin Sibayan"
     ],
@@ -41,7 +41,6 @@
       "Mrs. Maretis Ratonel",
       "Mrs. Emily Pine",
       "Mrs. Florencia Sibayan",
-      "Mrs. Nancy Diaz",
       "Mrs. Perla Guiao"
     ]
   },
@@ -60,12 +59,11 @@
   ],
 
   "littleAttendants": {
-    "flowerGirls": ["Jannea Rhian Tamondong", "Summer Elery Canilang", "Brielle Tobes", "Flower Girl 4"],
+    "flowerGirls": ["Jannea Rhian Tamondong", "Summer Elery Canilang", "Brielle Tobes"],
     "bearers": [
       { "role": "Ring Bearer", "name": "Simon Perez" },
       { "role": "Coin Bearer", "name": "Ryden Lacson" },
-      { "role": "Bible Bearer", "name": "Enteng Camacho" },
-      { "role": "Banner Bearer", "name": "Banner Bearer Name" }
+      { "role": "Bible Bearer", "name": "Enteng Camacho" }
     ]
   },
 
