@@ -12,13 +12,14 @@
 
   "honorAttendants": {
     "maidOfHonor": "Amazing Grace Galay",
-    "bestMan": "Job "
+    "bestMan": "Jose Brando Castro "
   },
 
   "principalSponsors": {
     "men": [
       "LTGEN John Bonafos AFP(RET)",
       "Arch. Wilson Ligaray",
+      "Arch. Jay Gamboa",
       "Dr. Ricardo Valdez",
       "Ptr. Jose Roque",
       "Ptr. Randy Mendoza",
@@ -32,6 +33,7 @@
     "women": [
       "Dr. Ma. Luina Bonafos",
       "Dr. Sheridan Manamtam",
+      "Mrs. Perla Guiao",
       "Dr. Ingrid Valdez",
       "Mrs. Nancy Roque",
       "Mrs. Faye Mendoza",
@@ -40,8 +42,7 @@
       "Mrs. Cela Pagsolingan",
       "Mrs. Maretis Ratonel",
       "Mrs. Emily Pine",
-      "Mrs. Florencia Sibayan",
-      "Mrs. Perla Guiao"
+      "Mrs. Florencia Sibayan"
     ]
   },
 
@@ -53,8 +54,8 @@
 
   "bridalParty": [
     { "bridesmaid": "Jackie Lou Gamboa", "groomsman": "Mark James Camacho" },
-    { "bridesmaid": "Dulce Duran", "groomsman": "Rojie Lloyd Duran" },
-    { "bridesmaid": "Jaaziel Resquid", "groomsman": "Kirby Duran" },
+    { "bridesmaid": "Dulce Maria Duran", "groomsman": "Rojie Lloyd Duran" },
+    { "bridesmaid": "Jaaziel Resquid", "groomsman": "Kierby Duran" },
     { "bridesmaid": "Janilla Kumar", "groomsman": "Laurence Canilang" }
   ],
 
@@ -68,8 +69,9 @@
   },
 
   "schedule": [
-    { "time": "3:00 PM", "label": "Wedding ceremony" },
-    { "time": "5:00 PM", "label": "Cocktail hour" },
+    { "time": "3:00 PM", "label": "Call time" },
+    { "time": "4:00 PM", "label": "Wedding ceremony" },
+    { "time": "5:00 PM", "label": "Fellowship hour" },
     { "time": "6:30 PM", "label": "Dinner reception" }
   ],
 
