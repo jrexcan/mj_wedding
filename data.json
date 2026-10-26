@@ -6,8 +6,8 @@
   },
 
   "parents": {
-    "groom": ["Mr. Esmeraldo C. Canilang", "Mrs. Elvira D. Canilang"],
-    "bride": ["Mr. Mark Gil S. Camacho", "Mrs. Espedita S. Camacho"]
+    "groom": ["Esmeraldo C. Canilang", "Elvira D. Canilang"],
+    "bride": ["Mark Gil S. Camacho", "Espedita S. Camacho"]
   },
 
   "honorAttendants": {
@@ -17,54 +17,59 @@
 
   "principalSponsors": {
     "men": [
+      "Oscar Vinoya",
+      "Dr. Ricardo Valdez",
+      "Venier Vistro",
       "LTGEN John Bonafos AFP(RET)",
+      "Mun. Coun. Joel Frias",
       "Arch. Wilson Ligaray",
       "Arch. Jay Gamboa",
-      "Dr. Ricardo Valdez",
+      "Edwin Sibayan",
       "Ptr. Jose Roque",
       "Ptr. Randy Mendoza",
       "Ptr. Ariel Gavarra",
       "Ptr. Ricardo David",
-      "Mr. Rod Pagsolingan",
-      "Mr. Oscar Vinoya",
-      "Mr. Venier Vistro",
-      "Mr. Edwin Sibayan"
+      "Rod Pagsolingan"
+      
     ],
     "women": [
-      "Dr. Ma. Luina Bonafos",
-      "Dr. Sheridan Manamtam",
-      "Mrs. Perla Guiao",
+      "Nancy Diaz",
       "Dr. Ingrid Valdez",
-      "Mrs. Nancy Roque",
-      "Mrs. Faye Mendoza",
-      "Mrs. Jasmin Camba",
+      "Emily Pine",
+      "Dr. Ma. Luina Bonafos",
+      "Josenia Galanto",
+      "Dr. Sheridan Manamtam",
+      "Perla Guiao",
+      "Florencia Sibayan",
+      "Nancy Roque",
+      "Faye Mendoza",
+      "Jasmin Camba",
       "Ptra. Jeanmiracle De Guzman",
-      "Mrs. Cela Pagsolingan",
-      "Mrs. Maretis Ratonel",
-      "Mrs. Emily Pine",
-      "Mrs. Florencia Sibayan"
+      "Cela Pagsolingan"
+    
     ]
   },
 
   "secondarySponsors": [
     { "role": "Candle", "sponsor1": "Jonieronne Tamondong", "sponsor2": "Donna Vhie Tamondong" },
     { "role": "Veil", "sponsor1": "Alex Perez", "sponsor2": "Gliza Veron Perez" },
-    { "role": "Cord", "sponsor1": "Genesis Tamondong", "sponsor2": "Erisa Sanchez" }
+    { "role": "Cord", "sponsor1": "Genesis Tamondong", "sponsor2": "Janilla Kumar" }
   ],
 
   "bridalParty": [
-    { "bridesmaid": "Jackie Lou Gamboa", "groomsman": "Mark James Camacho" },
-    { "bridesmaid": "Dulce Maria Duran", "groomsman": "Rojie Lloyd Duran" },
-    { "bridesmaid": "Jaaziel Resquid", "groomsman": "Kierby Duran" },
-    { "bridesmaid": "Janilla Kumar", "groomsman": "Laurence Canilang" }
+    { "groomsman": "Mark James Camacho", "bridesmaid": "Jaaziel Resquid"},
+    { "groomsman": "Rojie Lloyd Duran",  "bridesmaid": "Erisa Sanchez"},
+    {"groomsman": "Kierby Duran", "bridesmaid": "Jackie Lou Gamboa"},
+    { "groomsman": "Laurence Canilang", "bridesmaid": "Dulce Maria Duran"}
   ],
 
   "littleAttendants": {
     "flowerGirls": ["Jannea Rhian Tamondong", "Summer Elery Canilang", "Brielle Tobes"],
     "bearers": [
-      { "role": "Ring Bearer", "name": "Aele Simon Perez" },
-      { "role": "Coin Bearer", "name": "Ryden Lacson" },
-      { "role": "Bible Bearer", "name": "Zach Zyaire Camacho" }
+      { "role": "Ring Bearer", "name": "Ryden Lacson" },
+      { "role": "Coin Bearer", "name": "John Skyler Canilang" },
+      { "role": "Bible Bearer", "name": "Zach Zyaire Camacho" },
+      { "role": "Banner Bearer", "name": "Aeron Luke Perez" }
     ]
   },
 

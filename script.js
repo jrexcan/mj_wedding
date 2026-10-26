@@ -65,7 +65,7 @@ function applyWeddingData(data) {
 
   if (Array.isArray(data.bridalParty)) {
     set('bridal-pairs-list', data.bridalParty.map((p) =>
-      `<p class="sub-detail">${escapeHtml(p.bridesmaid)} &amp; ${escapeHtml(p.groomsman)}</p>`
+      `<p class="sub-detail">${escapeHtml(p.groomsman)} &amp; ${escapeHtml(p.bridesmaid)}</p>`
     ).join(''));
   }
 
