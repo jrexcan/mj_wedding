@@ -53,7 +53,7 @@
   "secondarySponsors": [
     { "role": "Candle", "sponsor1": "Jonieronne Tamondong", "sponsor2": "Donna Vhie Tamondong" },
     { "role": "Veil", "sponsor1": "Alex Perez", "sponsor2": "Gliza Veron Perez" },
-    { "role": "Cord", "sponsor1": "Genesis Tamondong", "sponsor2": "Janilla Kumar" }
+    { "role": "Cord", "sponsor1": "Dixther Flores", "sponsor2": "Janilla Kumar" }
   ],
 
   "bridalParty": [
@@ -88,5 +88,5 @@
     "mapImageAlt": "Map showing the way to WestFarm Resort Hotel"
   },
 
-  "rsvpDeadline": "November 25, 2026"
+  "rsvpDeadline": "December 01, 2026"
 }
